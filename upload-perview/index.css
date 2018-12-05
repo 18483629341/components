@@ -1,0 +1,74 @@
+.img_preview{
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+.imgDiv{
+	margin: 0 auto;
+    margin-left: 50%;
+    transform:translateX(-50%);
+	border: 1px solid #ddd;
+	box-shadow: 1px 1px 5px 0px #a2958a;
+	padding: 5px;
+	display: table;
+	text-align: center;
+	vertical-align: middle;
+	height:180px;
+}
+.img_preview{
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+.imgDiv{
+	margin: 0 auto;
+  margin-left: 50%;
+	transform: translateX(-50%);
+	border: 1px solid #ddd;
+	box-shadow: 1px 1px 5px 0px #a2958a;
+	padding: 5px;
+	display: table;
+	text-align: center;
+	vertical-align: middle;
+	height:180px;
+}
+.imgDiv:hover{	
+	box-shadow: 1px 1px 5px 0px #000;
+}
+.img180h{
+	height:160px;
+	width:auto;
+	margin-bottom: 5px;
+}
+.imgDiv:hover{	
+	box-shadow: 1px 1px 5px 0px #000;
+}
+.img180h{
+	height:160px;
+	width:auto;
+	margin-bottom: 5px;
+} 
+.InputFilebtn {
+	position: relative;
+    width: 104px;
+    height: 100%;
+    border-radius: 0;
+    font-size: 14px;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .InputFile {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	}

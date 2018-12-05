@@ -1,0 +1,9 @@
+.container {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    background: rgb(255, 255, 255);
+    padding: 1rem;
+    touch-action: none;
+}

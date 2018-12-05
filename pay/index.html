@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>pay</title>
+    <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        .showInApple,
+        .showInAndriod,
+        .showInPc {
+            display: none;
+        }
+        
+        .centerDiv {
+            display: inline-block;
+        }
+        
+        button {
+            background: #fff;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+        
+        button:active {
+            border: none;
+        }
+        
+        .walletIcon,
+        .payIcon {
+            display: inline-block;
+            width: 3rem;
+            height: 3rem;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        
+        .payIcon {
+            background-image: url(./img/pay.png);
+        }
+        
+        .walletIcon {
+            background-image: url(./img/wallet.png);
+        }
+        
+        .btnFont {
+            position: relative;
+            top: -1.2rem;
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+
+<body style="padding:2rem 1rem 1rem ;">
+    <div>
+        <p>What's your mobile system?</p>
+        <div class="centerDiv">
+            <button onclick="showApple()">IOS</button>
+            <button onclick="showAndriod()">Android</button>
+        </div>
+
+    </div>
+    <div class="centerDiv">
+        <button class="showInApple"><span class="walletIcon"></span> <span class="btnFont">add to apple wallet</spa> </button>
+        <button class="showInAndriod"><span class="payIcon"></span> <span class="btnFont">add to G pay</span></button>
+        <p class="showInPc">Sorry,此页面涉及手机支付,仅在手机中显示!</p>
+    </div>
+    <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+    <script>
+        var showInApples = document.getElementsByClassName("showInApple");
+        var showInAndriods = document.getElementsByClassName("showInAndriod");
+        var showInPcs = document.getElementsByClassName("showInPc");
+        var browser = {
+                versions: function() {
+                    var u = navigator.userAgent,
+                        app = navigator.appVersion;
+                    return { //移动终端浏览器版本信息
+                        trident: u.indexOf('Trident') > -1, //IE内核
+                        presto: u.indexOf('Presto') > -1, //opera内核
+                        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                        iPad: u.indexOf('iPad') > -1, //是否iPad
+                        webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                    };
+                }(),
+                language: (navigator.browserLanguage || navigator.language).toLowerCase()
+            }
+            //alert(navigator.userAgent);
+
+        function showApple() {
+            if (browser.versions.ios) {
+                for (var i = 0; i < showInApples.length; i++) {
+                    showInApples[i].style.display = 'block';
+                }
+                for (var i = 0; i < showInAndriods.length; i++) {
+                    showInAndriods[i].style.display = ' none';
+                }
+            }
+
+        }
+
+        function showAndriod() {
+            if (browser.versions.android) {
+                for (var i = 0; i < showInAndriods.length; i++) {
+                    showInAndriods[i].style.display = ' block';
+                }
+                for (var i = 0; i < showInApples.length; i++) {
+                    showInApples[i].style.display = 'none';
+                }
+            }
+
+        }
+        // if (browser.versions.mobile) { //判断是否是移动设备打开。browser代码在下面
+        //     var ua = navigator.userAgent.toLowerCase(); //获取判断用的对象
+        //     if (browser.versions.ios) {
+        //         //是否在ios手机打开
+        //         for (var i = 0; i < showInApples.length; i++) {
+        //             showInApples[i].style.display = 'block';
+        //         }
+        //     } else {
+        //         //是否在安卓手机打开
+        //         for (var i = 0; i < showInAndriods.length; i++) {
+        //             showInAndriods[i].style.display = ' block';
+        //         }
+        //     }
+        // } else {
+        //     for (var i = 0; i < showInPcs.length; i++) {
+        //         showInPcs[i].style.display = 'block';
+        //     }
+        // }
+    </script>
+
+</html>

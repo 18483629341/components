@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>禁止下拉</title>
+    <style type="text/css">
+        .cc {
+            background-color: #000;
+            width: 300px;
+            height: 110px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cc" onclick="aaa()">
+        <audio controls id="aa" preload="metadata" loop ;>
+					<source src="ThatGirl.mp3" type="">
+						
+                </audio>
+
+        <span class="a"></span>
+        <!-- <embed height="200" width="100%" id="aa" src="horse.mp3"> -->
+    </div>
+
+    <div id="m">
+        1113
+    </div>
+
+    <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+    <script>
+        var playedTime = 0;
+        var audio = document.getElementById('aa');
+        aa.volume = 0.2;
+        alert(navigator.userAgent);
+
+        function aaa() {
+            if (audio.paused) {
+                audio.play();
+                playedTime++;
+                m.innerHTML = 'playing ...';
+
+                alert(audio.volume);
+            } else {
+                audio.pause();
+                m.innerHTML = '2';
+
+                setTimeout(function() {
+                    audio.play();
+                    m.innerHTML = 'js controls play';
+                    aa.volume = 0.5;
+                    alert(audio.volume);
+                }, 2000);
+            }
+
+        }
+
+        var browser = {
+            versions: function() {
+                var u = navigator.userAgent,
+                    app = navigator.appVersion;
+                return { //移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        console.log(browser.versions);
+        if (browser.versions.mobile) { //判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase(); //获取判断用的对象
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //在微信中打开
+                document.addEventListener('DOMContentLoaded', function() {
+
+                    audioAutoPlay();
+                });
+                audio.addEventListener('canplaythrough', function() {
+
+                    m.innerHTML = '2'
+                });
+                alert("微信")
+            } else if (browser.versions.android) {
+                //是否在安卓浏览器打开
+
+                autoplay2()
+                alert("安卓")
+            } else {
+                //是否在IOS浏览器打开
+                alert("IOS")
+                    // var o = document.getElementById('aa');
+                    //setBlob()
+
+                selfLoad()
+
+
+            }
+        } else {
+            //否则就是PC浏览器打开
+
+            autoplay2()
+        }
+
+
+        function audioAutoPlay() {
+
+            document.addEventListener("WeixinJSBridgeReady", function() {
+
+
+                audio.play();
+
+
+            }, false);
+
+        }
+
+        function autoplay2() {
+
+
+            audio.play();
+            m.innerHTML = '2'
+        }
+
+        function selfLoad() {
+            $("#aa").load("./ThatGirl.mp3", function(responseTxt, statusTxt, xhr) {
+                alert("执行回调");
+                if (statusTxt == "success") {
+                    m.innerHTML = '2'
+                } else {
+                    m.innerHTML = 'Error'
+                }
+
+            });
+        }
+    </script>
+
+</html>

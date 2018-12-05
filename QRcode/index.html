@@ -1,0 +1,368 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <!-- <link rel="stylesheet" href="lib/css/index.css">
+	<link rel="stylesheet" href="./css/bootstrap.min.css">-->
+	<link rel="stylesheet" type="text/css" href="https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/bootstrap.min.css">
+	<script type="text/javascript" src="https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/qrcode.lib.min.js"></script>
+	<script type="text/javascript" src="https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/qrcode.js"></script>
+	<script type="text/javascript" src="https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/jquery.min.js"></script>
+	<script type="text/javascript" src="https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/bootstrap.min.js"></script>
+	
+</head>
+
+<body ondrag="return false">
+    <!-- <div class="container"> -->
+    <div id="qrWarp" class="qrWarp" style=" touch-action: none;">
+   
+        <div id="qrContent" class="qrContent text-center">
+            <div class="qrBoxfull">
+                <video id="video" class="video" width="534" height="534" webkit-playinline="true" playinline="true" type="video/mp4">
+                        您的瀏覽器不支持video
+                </video>
+                <div class="qrBox">
+                    <div class="coverLine" id="coverLine"></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
+                </div>
+                <div id="result" class="result">
+                </div>
+            </div>
+					
+            <canvas id="canvas" width="140" height="140" style="">
+                        您的瀏覽器不支持canvas
+                </canvas>
+					
+        </div>
+        <div id="staffActive" class="text-center"></div>
+			
+    </div>
+     <div class="text-center btnBox">
+					<button id="snap" class="btn btn-default ">scan</button>
+					<button id="pause" class="btn btn-default">stop</button>
+			</div>
+			<div class=" text-center result-qrcode"></div>
+    <!-- </div> -->
+
+<!--<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/qrcode.lib.min.js"></script>
+<script src="./qrcode.js"></script>
+<script src="lib/js/index.js"></script>-->
+
+
+    	<style>.text-center {
+  text-align: center;
+}
+.qrWarp {
+  padding: 20px 0;
+  position: relative;
+}
+.qrWarp .qrContent {
+  margin: 0 auto;
+  position: relative;
+  width: 300px;
+  border: 1px solid red;
+}
+.qrWarp .qrContent .qrBoxfull {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 20px;
+  position: relative;
+  border: 1px solid #d6d6d6;
+}
+.qrWarp .qrContent .qrBoxfull .video {
+  margin: -117px 0 0 -117px;
+}
+.qrWarp .qrContent .qrBoxfull .qrBox {
+  display: inline-block;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  border: 1px solid #d6d6d6;
+  margin-bottom: 12px;
+  top: 80px;
+  left: 80px;
+}
+.qrWarp .qrContent .qrBoxfull .coverLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 5px;
+  background: -webkit-linear-gradient(left, transparent 5%, rgba(136, 255, 0, 0.5) 10%, rgba(0, 255, 34, 0.5) 50%, rgba(136, 255, 0, 0.5) 90%, transparent 95%);
+  background: -o-linear-gradient(left, transparent 5%, rgba(136, 255, 0, 0.5) 10%, rgba(0, 255, 34, 0.5) 50%, rgba(136, 255, 0, 0.5) 90%, transparent 95%);
+  background: -moz-linear-gradient(left, transparent 5%, rgba(136, 255, 0, 0.5) 10%, rgba(0, 255, 34, 0.5) 50%, rgba(136, 255, 0, 0.5) 90%, transparent 95%);
+  background: linear-gradient(left, transparent 5%, rgba(136, 255, 0, 0.5) 10%, rgba(0, 255, 34, 0.5) 50%, rgba(136, 255, 0, 0.5) 90%, transparent 95%);
+  animation: topTOBottom 2s linear infinite;
+}
+.qrWarp .qrContent .qrBoxfull .corner {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.qrWarp .qrContent .qrBoxfull .tl {
+  /*background-image:url(../img/tl.png);*/
+
+  background-image: url(https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/tl.png);
+  top: 0;
+  left: 0;
+}
+.qrWarp .qrContent .qrBoxfull .tr {
+  /*background-image:url(../img/tl.png);*/
+
+  background-image: url(https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/tr.png);
+  top: 0;
+  right: 0;
+}
+.qrWarp .qrContent .qrBoxfull .bl {
+  /*background-image:url(../img/tl.png);*/
+
+  background-image: url(https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/bl.png);
+  bottom: 0;
+  left: 0;
+}
+.qrWarp .qrContent .qrBoxfull .br {
+  /*background-image:url(../img/tl.png);*/
+
+  background-image: url(https://sandbox.runjs.cn/uploads/rs/82/8zo5tylw/br.png);
+  bottom: 0;
+  right: 0;
+}
+#pause {
+  display: none;
+}
+.btnBox {
+  position: relative;
+  top: 117px;
+}
+#canvas {
+  background: #000;
+  position: relative;
+  top: 17px;
+  display: none;
+}
+@keyframes topTOBottom {
+  from {
+  top: 0;
+}
+to {
+  top: 135px;
+}
+
+}
+@-moz-keyframes topTOBottom {
+  from {
+  top: 0;
+}
+to {
+  top: 135px;
+}
+
+}
+@-webkit-keyframes topTOBottom {
+  from {
+  top: 0;
+}
+to {
+  top: 135px;
+}
+
+}
+@-o-keyframes topTOBottom /* Opera */ {
+  from {
+  top: 0;
+}
+to {
+  top: 135px;
+}
+
+}
+</style>
+	    		<script>//https://www.cnblogs.com/foreverZ/p/6795986.html  手机调取摄像头问题（getUserMedia）
+var mediaOpts = {
+    audio: false,
+    video: {
+        facingMode: { exact: "environment" },
+        //width: { min: 1024, ideal: 1280, max: 1920 },
+        //height: { min: 776, ideal: 720, max: 1080 }
+    }
+}
+var maxLen = 534;
+var timer=null;
+var pramers={};
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+var video = document.getElementById("video");
+var play, count;
+var x, y, w, h, vh, vw, v, maxLen, cw;
+var arg = null,
+    argh = {},
+    argv = {};
+maxLen = 534;
+cw = 140;
+var videoTryOnce = true;
+// getUserMedia 被标准废除了，mediaDevices 正在取代中
+if (navigator.mediaDevices === undefined) {
+    navigator.mediaDevices = {};
+}
+if (navigator.mediaDevices.getUserMedia === undefined) {
+    navigator.mediaDevices.getUserMedia = function(constraints) {
+        var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+        if (!getUserMedia) {
+            return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+        }
+        return new Promise(function(resolve, reject) {
+            getUserMedia.call(navigator, constraints, resolve, reject);
+        });
+    }
+}
+window.URL = (window.URL || window.webkitURL || window.mozURL || window.msURL);
+var WHobj = { W: 480, H: 640, w: 140, h: 140 }
+
+function startPat(t) {
+    alert(context)
+    timer = setTimeout(function() {
+        if (context) {
+            //context.drawImage(video, (WHobj.W - WHobj.w) / 2, (WHobj.H - WHobj.h) / 2, WHobj.w, WHobj.H);
+            context.drawImage(video, 170, 250, 140, 390, 0, 0, 140, 140); //将获取视频绘制在画布上
+            alert('Pat over')
+        }
+    }, 200)
+}
+
+function successFunc(stream) {
+    if (videoTryOnce) {
+        videoTryOnce = false;
+        var video = document.querySelector('video');
+        if ("srcObject" in video) {
+            video.srcObject = stream
+        } else {
+            video.src = window.URL && window.URL.createObjectURL(stream) || stream
+        }
+
+
+        video.onloadedmetadata = function() {
+            alert('摄像头成功打开！');
+            vh = video.videoWidth;
+            vw = video.videoHeight;
+            v = vh > vw ? vw / vh : vh / vw;
+            argh.h = parseInt(maxLen * v);
+            argh.w = parseInt(maxLen);
+            argh.y = parseInt(-(argh.h - cw) / 2);
+            argh.x = parseInt(-(argh.w - cw) / 2);
+            argv.h = parseInt(maxLen * v);
+            argv.w = parseInt(maxLen);
+            argv.y = parseInt(-(argh.w - cw) / 2);
+            argv.x = parseInt(-(argh.h - cw) / 2);
+            var radio = devicePixelRatio;
+            pramers.cx = parseInt((video.videoWidth - cw) / 2);
+            pramers.cy = parseInt((video.videoHeight - cw) / 2);
+            pramers.swidth = parseInt((pramers.cx + cw / radio));
+            pramers.sheight = parseInt((pramers.cy + cw / radio));		
+            playFun();
+        };
+    } else {
+        playFun();
+    }
+}
+
+function playFun() {
+    if (window.orientation == 90 || window.orientation == -90) {
+        arg = argh
+    } else {
+        arg = argv
+    }
+    play = true;
+    $("#result").html("Please align the QR within the box outline");
+    count = 0;
+    video.play();
+    $("#snap").attr("disabled", true);
+    $("#coverLine").addClass("coverLine");
+    startPat();
+    $("#snap").hide();
+    $("#pause").show();
+    alert('Pat over')
+}
+
+function errorFunc(err) {
+    alert(err.name);
+}
+
+
+navigator.getUserMedia(mediaOpts, successFunc, errorFunc);
+
+
+function startPat() {
+	
+    timer = setTimeout(function() {
+        if (context) {
+            // context.drawImage(video, arg.x, arg.y, arg.w, arg.h);
+            context.drawImage(video, pramers.cx, pramers.cy, pramers.swidth, pramers.sheight, 0, 0, 140, 140);
+            CatchCode();
+        }
+    }, 200)
+}
+
+function CatchCode() {
+    var imgData = canvas.toDataURL();
+    var base64Data = imgData;
+    qrcode.decode(base64Data);
+    qrcode.callback = function(data) {
+        //得到扫码的结果
+        count = 0;
+			 
+        if (!/err/.test(data)) {
+					 //alert("2")
+            clearTimeout(timer);
+            $("#result").html("");
+            $("#snap").removeAttr("disabled", true);
+            $("#coverLine").removeClass("coverLine")
+            startPat();
+            $("#pause").hide();
+            $("#snap").show();
+            video.pause();
+            handleQRcodeData(data);
+        } else {
+					  
+            count++;
+            if (count > 50) {
+                $("#result").html("Please align the QR within the box outline");
+                startPat();
+            }
+            if (count <= 50) {
+                startPat();
+                return;
+            }
+        }
+    };
+};
+$("#pause").click(function() {
+    if (timer) {
+        clearTimeout(timer);
+    }
+    $("#pause").hide();
+    $("#snap").show();
+    $("#coverLine").removeClass("coverLine");
+    $("#snap").removeAttr("disabled")
+})
+$("#snap").click(function() {
+    $("#pause").show();
+    $("#snap").hide();
+    $("#coverLine").addClass("coverLine");
+    navigator.getUserMedia(mediaOpts, successFunc, errorFunc);
+})
+
+
+
+function handleQRcodeData(data) {
+    $("#result").html(data);
+}</script>
+	
+<!-- Generated by RunJS (Wed Dec 05 17:17:18 CST 2018) 64ms --></body></html>

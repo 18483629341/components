@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">  
+<meta name="apple-mobile-web-app-capable" content="yes">  
+<meta name="apple-mobile-web-app-status-bar-style" content="black">  
+<meta name="format-detection" content="telephone=no">  
+<title>禁止下拉</title>  
+<style>
+     .kickBack {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0;
+        background: rgb(255, 255, 255);
+        padding: 1rem;
+       
+    }
+    .kickBack-content {
+        min-height: 100%;
+    }
+    .kickBackIOS {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+    }
+    .kickBack-contentIOS {
+        min-height: 107%;
+    } 
+    .kickBackNOIOS {
+        touch-action: none;
+    }
+    .kickBack-contentNOIOS {
+        min-height: 100%;
+    } 
+</style>   
+  
+  
+</head>  
+<body on-drag="return false">  
+    <div class="kickBack">
+        <div class="kickBack-content"> 
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉！<br/>  
+            禁止下拉2！<br/>  
+          
+        
+        </div>   
+    </div>  
+</body> 
+<script src="../jquery.min.js"></script> 
+<script src="./kickBack.js"></script>
+<script>
+    kickBackfun();   
+</script>  
+</html>  
