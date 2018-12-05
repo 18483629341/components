@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+      #yuanEvent{
+				border:1px solid red;
+				background:pink;
+			}
+			#yuanEvent2{
+				border:1px solid blue;
+				background:yellow;
+			}
+			#bindEvent{
+				border:1px solid green;
+				background:green;
+			}
+  </style>
+ </head>
+ <body>
+     <div id="" class="">
+				<span id="yuanEvent" >onclick</span>
+				<span id="yuanEvent2" >listener</span>
+				<span id="bindEvent" >Handler</span>
+     </div>
+ <script type="text/javascript">
+ /************监听法一：on事件名******************************/
+  window.onload = function(){ 
+			var btn = document.getElementById("yuanEvent"); 
+			btn.onclick = function(){   //这种事件、方法都写在了一起 btn.onclick=function(){}
+				alert("第一个事件on事件名"); 
+			} 
+			btn.onclick = function(){ 
+				alert("第二个事件on事件名"); 
+			} 
+			btn.onclick = function(){ 
+				alert("第三个事件on事件名");         //只有最后一个管用，覆盖之前的所有方法
+			} 
+		
+ /************监听法二：元素.addEventListener(‘事件名’，方法名)***************************/ 
+     /*原生态的事件绑定函数addEventListener：*/
+     var eventOne = function(){ 
+		alert("第一个监听事件"); 
+		} 
+		function eventTwo(){ 
+		alert("第二个监听事件"); 
+		} 
+
+	 var btn2 = document.getElementById("yuanEvent2"); 
+	 //addEventListener：绑定函数 
+	 btn2.addEventListener("click",eventOne);    //挨着顺序执行
+	 btn2.addEventListener("click",eventTwo); 
+	 btn2.removeEventListener("click",eventTwo);       //解绑事件，后面跟的一定是句柄
+
+
+
+/*******对函数进行封装后的监听事件如下，兼容各大主流浏览器。**********/
+	/* 
+	 * addEventListener:监听Dom元素的事件 
+	 * 
+	 * target：监听对象 
+	 * type：监听函数类型，如click,mouseover 
+	 * func：监听函数 
+	 */
+	function addEventHandler(target,type,func){ 
+	 if(target.addEventListener){ 
+	  //监听IE9，谷歌和火狐 
+	  target.addEventListener(type, func, false); 
+	 }else if(target.attachEvent){ 
+	  target.attachEvent("on" + type, func); 
+	 }else{ 
+	  target["on" + type] = func; 
+	 } 
+	} 
+	/* 
+	 * removeEventHandler:移除Dom元素的事件 
+	 * 
+	 * target：监听对象 
+	 * type：监听函数类型，如click,mouseover 
+	 * func：监听函数 
+	 */
+	function removeEventHandler(target, type, func) { 
+	 if (target.removeEventListener){ 
+	  //监听IE9，谷歌和火狐 
+	  target.removeEventListener(type, func, false); 
+	 } else if (target.detachEvent){ 
+	  target.detachEvent("on" + type, func); 
+	 }else { 
+	  delete target["on" + type]; 
+	 } 
+	} 
+	
+	
+	 var bindEventBtn = document.getElementById("bindEvent"); 
+	 //监听eventOne事件 
+	 addEventHandler(bindEventBtn,"click",eventOne); 
+	 //监听eventTwo事件 
+	 addEventHandler(bindEventBtn,"click",eventTwo ); 
+	 //监听本身的事件 
+	 addEventHandler(bindEventBtn,"click",function(){ 
+	  alert("第三个监听事件"); 
+	 }); 
+	 //取消第一个监听事件 
+	 removeEventHandler(bindEventBtn,"click",eventOne); 
+	 //取消第二个监听事件 
+	 removeEventHandler(bindEventBtn,"click",eventTwo); 
+	} 
+   //事件的兼容性处理
+ /*if(event){
+	var e = event || window.event || arguments.callee.caller.arguments[0]; 
+	var dom=ev.srcElement||ev.target;
+}*/
+
+ </script>
+  
+ </body>
+</html>

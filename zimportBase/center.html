@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .flex_box {
+            width: 100%;
+            height: 60px;
+            border: 1px solid red;
+            display: flex;
+            vertical-align: middle;
+        }
+        
+        .item1 {
+            width: 100px;
+            border: 1px solid blue;
+        }
+        
+        .item2 {
+            border: 1px solid blue;
+            flex: 1;
+        }
+        
+        .item3 {
+            border: 1px solid greenyellow;
+            flex: 1;
+        }
+        
+        .parent {
+            width: 30rem;
+            height: 20rem;
+            border: 1px solid red;
+            position: relative;
+        }
+        
+        .child {
+            width: 12rem;
+            height: 8rem;
+            background: #28344f;
+            position: absolute;
+            left: 0;
+            /* left与right配对出现控制 */
+            right: 0;
+            top: 0;
+            /* top与bottom配对出现控制 */
+            bottom: 0;
+            margin: auto;
+            /* 这句也是必不可少 */
+        }
+        
+        .parent2 {
+            width: 30rem;
+            height: 20rem;
+            border: 1px solid red;
+        }
+        
+        .wraper2 {
+            border: 1px solid red;
+            float: left;
+            position: relative;
+            left: 50%;
+            clear: both;
+        }
+        
+        .child2 {
+            position: relative;
+            border: 1px solid blue;
+            left: -50%;
+            white-space: nowrap;
+        }
+        
+        .parent3 {
+            font-size: 175.4px;
+            height: 200px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+        
+        .child3 {
+            display: inline;
+            font-size: 12px;
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- flex  align="center" 。。。。 -->
+    <div class="flex_box">
+        <div class="item1">yes</div>
+        <div class="item2">i do</div>
+        <div class="item3">i belive</div>
+
+    </div>
+    <!-- table  align="center" 。。。。 -->
+    <table>
+        <tr>
+            <td height="100" width="200" style="border:1px solid red;vertical-align:middle;">abc</td>
+            <td height="100" width="200" style="border:1px solid red;text-align:center;">def</td>
+        </tr>
+        <tr>
+            <td height="100" width="200" style="border:1px solid red;" align="center">abc</td>
+            <td height="100" width="200" style="border:1px solid red;" align="middle">def</td>
+        </tr>
+    </table>
+    <!-- 子元素inline-block -->
+    <div id="" class="" style="display:table-cell;vertical-align:middle;text-align:center;width:200px;height:300px;border:1px solid red;">
+        <div id="" class="" style="width:100px;height:90px;background:#ab36df;display:inline-block;">
+
+        </div>
+    </div>
+    <!-- 子元素绝对定位 -->
+    <div id="" class="parent">
+        <div id="" class="child">
+
+        </div>
+    </div>
+    <!-- 使用浮动配合相对定位来进行水平居中-->
+    <div class="parent2">
+        <div class="wraper2">
+            <div class="child2">
+                我水平居中了哦！
+            </div>
+        </div>
+        <div class="wraper2">
+            <div class="child2">
+                宽度不同哦
+            </div>
+        </div>
+        <div class="wraper2">
+            <div class="child2">
+                确实啊
+            </div>
+        </div>
+    </div>
+    <!-- 利用font-size来实现垂直居中 -->
+    <div id="" class="parent3">
+        <div id="" class="child3">
+
+        </div>
+    </div>
+</body>
+
+</html>

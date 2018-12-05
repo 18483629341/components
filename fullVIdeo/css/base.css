@@ -1,0 +1,207 @@
+.firstLoading .content {
+  background: #004182 url('../img/logo-01.png') no-repeat center 22%;
+  background-size: 17rem;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+}
+.firstLoading .firstClose {
+  width: auto;
+  text-shadow: none;
+  float: right;
+  margin: 1rem 2rem 0 0;
+  position: relative;
+}
+.firstLoading .firstClose span {
+  font-size: 1.5rem;
+  color: #fff;
+}
+.firstLoading .firstClose i.icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: .8rem solid transparent;
+  border-left: .8rem solid #fff;
+  position: absolute;
+  top: 0;
+  right: -2rem;
+}
+.firstLoading .videoPercent {
+  position: absolute;
+  width: 100%;
+  top: 65%;
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+}
+.firstLoading .videoLoading {
+  font-size: 0;
+}
+.firstLoading .videoLoading li {
+  margin: 1.8rem auto 0;
+  width: 0;
+  border: .2rem solid #fff;
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+}
+.firstLoading .videoLoading li i {
+  width: .8rem;
+  height: .8rem;
+  display: block;
+  border: 0.2rem solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  position: absolute;
+  top: -0.4rem;
+  left: -0.4rem;
+  z-index: 2;
+}
+.firstLoading .videoLoading li .animations {
+  animation: li1 1000ms linear  infinite;
+}
+.firstLoading .videoLoading li b {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block;
+  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  position: absolute;
+  top: -0.6rem;
+  left: -0.6rem;
+  z-index: 1;
+}
+.firstLoading .videoLoading li:nth-child(2) i,
+.firstLoading .videoLoading li:nth-child(2) b {
+  animation-delay: 333ms;
+}
+.firstLoading .videoLoading li:nth-child(3) i,
+.firstLoading .videoLoading li:nth-child(3) b {
+  animation-delay: 666ms;
+}
+.firstLoading .videoStart {
+  margin: 1.8rem auto 0;
+}
+.firstLoading .videoStart i {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  position: relative;
+  top: 0.4rem;
+}
+.firstLoading .videoStart i::after {
+  content: '';
+  display: block;
+  border: .7rem solid transparent;
+  border-left: .7rem solid #fff;
+  position: absolute;
+  top: .2rem;
+  left: 0.7rem;
+}
+.page2 {
+  background: #ddd url("../img/page2.jpg") no-repeat 0 0;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 99999;
+}
+.page2 .replay {
+  position: absolute;
+  top: 77%;
+  left: 34%;
+  width: 32%;
+  height: 5%;
+}
+.page2 .toLottery {
+  position: absolute;
+  top: 82.5%;
+  left: 27%;
+  width: 49%;
+  height: 6%;
+}
+.full {
+  height: 100%;
+  overflow: hidden;
+}
+@media screen and (orientation: landscape) {
+  .firstLoading .content {
+    background: #004182 url('../img/logo-01.png') no-repeat center 3%;
+    background-size: 13rem;
+  }
+  .firstLoading .rotate {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+    transform: rotate(0deg);
+    margin-left: 0;
+  }
+  .firstLoading #myVideo {
+    width: 100%;
+  }
+  .firstLoading .videoPercent {
+    top: 60%;
+  }
+  .firstLoading .videoPercentI {
+    margin-left: 12%;
+  }
+  .firstLoading .videoLoading {
+    position: absolute;
+    top: 11%;
+    left: 40%;
+  }
+  .firstLoading .videoLoading li {
+    float: left;
+    margin: 0 1.8rem 0 0;
+  }
+  .firstLoading .videoStart {
+    font-size: 1.5rem;
+    margin: 1.8rem auto 0;
+  }
+  .firstLoading .videoStart i {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .firstLoading .videoStart i::after {
+    border: .5rem solid transparent;
+    border-left: .5rem solid #fff;
+    top: .2rem;
+    left: 0.5rem;
+  }
+  .page2 {
+    background: #ddd url("../img/page2_h.jpg") no-repeat 0 0;
+    background-size: 100%;
+  }
+  .page2 .replay {
+    position: absolute;
+    top: 69%;
+    left: 40%;
+    width: 20%;
+  }
+  .page2 .toLottery {
+    position: absolute;
+    top: 76%;
+    left: 36.5%;
+    width: 27.5%;
+    height: 11%;
+  }
+}
+.hide {
+  display: none;
+}
+@keyframes li1 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

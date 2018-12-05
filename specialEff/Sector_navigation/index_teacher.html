@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #canvas {
+            background: #000;
+        }
+        
+        #nav {
+            width: 105px;
+            height: 318px;
+            position: absolute;
+            /*以下居中*/
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        
+        #nav li {
+            position: absolute;
+            left: 0;
+            right: 0;
+            list-style: none;
+            transform-origin: center bottom;
+            box-shadow: 2px 2px 20px #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <!--    ul>li*12>img[src=imags/img$.png] -->
+    <ul id="nav">
+        <li><img src="images/img1.png" alt=""></li>
+        <li><img src="images/img2.png" alt=""></li>
+        <li><img src="images/img3.png" alt=""></li>
+
+        <li><img src="images/img5.png" alt=""></li>
+        <li><img src="images/img6.png" alt=""></li>
+        <li><img src="images/img7.png" alt=""></li>
+        <li><img src="images/img8.png" alt=""></li>
+        <li><img src="images/img9.png" alt=""></li>
+        <li><img src="images/img4.png" alt=""></li>
+
+
+    </ul>
+    <script>
+        var canvas = document.getElementById("canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight + 200;
+        var con = canvas.getContext('2d');
+        var obj = [];
+        var balls = [];
+        var timer;
+        var on = true;
+        window.onload = function() {
+            var nav = document.getElementById("nav");
+            var lis = document.querySelectorAll("li");
+            var clicked = false;
+            //给封面添加点击事件
+            lis[lis.length - 1].onclick = function() {
+
+                console.log(1);
+                var v = 180 / lis.length;
+                var v = 170 / (lis.length - 1);
+
+                for (var i = 0; i < lis.length; i++) {
+                    if (!clicked) {
+                        n = parseInt(-85 + v * i);
+                    } else {
+                        n = 360;
+                    }
+                    lis[i].style.transition = '1s';
+                    lis[i].style.transform = 'rotate(' + n + 'deg)';
+                }
+                clicked = !clicked;
+
+            }
+            for (var i = 0; i < lis.length - 1; i++) {
+                lis[i].index = i;
+                lis[i].onclick = function() {
+                    this.style.transform = 'rotate(0deg)';
+                    var leftDeg = 0;
+                    var rightDeg = 15;
+
+
+                    for (var i = this.index - 1; i >= 0; i--) {
+                        leftDeg -= 15;
+                        lis[i].style.transform = 'rotate(' + leftDeg + 'deg)';
+                    }
+                    for (var i = this.index + 1; i < lis.length; i++) {
+                        console.log(rightDeg);
+                        rightDeg += 15;
+                        lis[i].style.transform = 'rotate(' + rightDeg + 'deg)';
+
+
+                    }
+
+
+                }
+
+            }
+            var colors = ['#cdff05', '#0404fe', '#10c892', '#fd0bb0',
+                '#e44108', '#906c39', '#7af21a', '#7b0ad3', '#6a05f4'
+            ];
+            canvas.onmousemove = function(ev) {
+
+                //在移动的时候创建两个圆就够了
+                for (var i = 0; i < 2; i++) {
+                    var ball = {
+                        x: random(-5, 5) + ev.clientX,
+                        y: random(-5, 5) + ev.clientY + window.pageYOffset, //window.pageYOffset为滚动条滚动的高度
+                        r: random(10, 45),
+                        vx: Math.random() - 0.5,
+                        vy: Math.random() - 0.5,
+                        color: colors[Math.floor(Math.random() * 9)]
+                    }
+                }
+                balls.push(ball);
+                if (balls.length > 300) {
+                    balls.shift();
+                }
+                console.log(balls.length);
+                drallball();
+
+                //让定时器只开启一次
+                if (on) {
+                    clearInterval(timer);
+                    timer = setInterval(drallball, 50);
+                    on = false;
+                }
+
+                function drallball() {
+                    con.clearRect(0, 0, canvas.width, canvas.height);
+                    for (var i = 0; i < balls.length; i++) {
+
+                        balls[i].x += balls[i].vx * 8;
+                        balls[i].y += balls[i].vy * 8;
+                        balls[i].r = balls[i].r * 0.94;
+                        balls[i].index = i; //添加索引
+                        if (balls[i].r < 1) {
+                            balls.splice(balls[i].index, 1);
+                            continue; //如果小球被删了，下面的代码不执行了
+                        }
+                        draw(balls[i]);
+                        console.log(1);
+                        //balls的数组里已经没有东西了   循环很多时候，有可能会继续执行者
+
+                        if (balls.length == 0) {
+                            clearInterval(timer);
+                            on = true;
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+
+        var randomColor = function() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        function random(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        var arr = [-1, 1, 0];
+
+        function ranl() {
+            var n = Math.floor(Math.random() * 3);
+            var a = arr[n];
+            return a;
+        }
+        /*DrawC 原型 start*/
+
+
+        function draw(b) {
+            con.beginPath();
+            con.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+            con.fillStyle = b.color;
+            con.globalCompositeOperation = "lighter";
+            con.fill();
+
+        }
+    </script>
+</body>
+
+</html>

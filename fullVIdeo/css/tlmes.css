@@ -1,0 +1,384 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Microsoft YaHei';
+  font-size: 62.5%;
+  color: #4C4C4C;
+}
+body {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  letter-spacing: .1rem;
+}
+body,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd,
+p,
+pre {
+  margin: 0;
+  padding: 0;
+}
+a,
+a:hover {
+  text-decoration: none;
+  color: #4C4C4C;
+}
+ul,
+ol {
+  list-style: none;
+}
+.lf {
+  float: left;
+}
+.rf {
+  float: right;
+}
+.clear::after,
+.clear::before {
+  content: '';
+  display: block;
+  clear: both;
+}
+#myWarp {
+  margin: 0 auto ;
+  max-width: 750px;
+}
+/* 刮刮卡 */
+.lottery {
+  border-top: 1px solid #2F8DE3;
+  padding-top: 20px;
+}
+.lotteryBox {
+  width: 70%;
+  margin: 0 auto;
+}
+#con {
+  height: 4.5rem;
+  width: 100%;
+  position: relative;
+  background: #EBEBEB;
+}
+#c1 {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 80%;
+  position: relative;
+  z-index: 1;
+}
+.noChance::before,
+.isRedeem::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.noChance::after {
+  content: '今日次数用光了';
+  display: inline-block;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  color: #fff;
+}
+.isRedeem::after {
+  content: '您已经领取了奖品';
+  display: inline-block;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  color: #fff;
+}
+.lotteryMsg {
+  width: 70%;
+  margin: 1.5rem auto 1rem;
+  line-height: 1.6rem;
+  text-align: center;
+  position: relative;
+}
+i.icon::after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% 100%;
+}
+.remainingTimes {
+  width: 42%;
+  padding-right: 1.5rem;
+}
+.remainingTimes i:after {
+  padding: .8rem 1rem;
+  background-image: url('../img/coupon.png');
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  z-index: -1;
+}
+.oneMore {
+  width: 24%;
+  background-color: #EBEBEB;
+  color: #2F8DE3;
+  padding: .5rem 0;
+  border: 1px solid #2F8DE3;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+.yourGift {
+  width: 33%;
+  padding: .5rem 0 .5rem 1rem;
+  cursor: pointer;
+}
+.yourGift i:after {
+  padding: .8rem;
+  background-image: url('../img/gift_s.png');
+  margin-right: -0.4rem;
+}
+.giftPrompt {
+  padding-top: 1rem;
+  text-align: center;
+}
+.prize {
+  display: none;
+  position: relative;
+  margin-top: 1.5rem;
+}
+.prize > div:nth-child(1) {
+  background-color: #41719C;
+}
+.prize > div:nth-child(2) {
+  background-color: #4F81B0;
+}
+.prize > div:nth-child(3) {
+  background-color: #5F9CD4;
+}
+.prize > div:nth-child(4) {
+  background-color: #79B5EB;
+}
+.prize > div:nth-child(5) {
+  background-color: #A9CEEF;
+}
+#storeMsg {
+  padding: 0.5rem;
+  background-color: #E6EAF4;
+}
+#storeMsg div {
+  padding: .2rem;
+  margin: 0 auto;
+  width: 80%;
+}
+.prize.icon::before {
+  content: '';
+  display: inline-block;
+  border: 1rem solid transparent;
+  border-bottom: 1rem solid #41719C;
+  position: absolute;
+  top: -1.7rem;
+  right: 25%;
+}
+.card .cardImg {
+  width: 40%;
+  padding: 2.3rem 0;
+}
+.card .cardImg img {
+  display: block;
+  max-width: 9.8rem;
+  margin-left: 3.5rem;
+}
+.card .cardDesc {
+  width: 59.5%;
+  padding: 2.3rem 2.5rem 2.3rem 0;
+  text-align: center;
+  color: #fff;
+}
+.card .cardDesc.center {
+  margin-top: 5%;
+}
+.card .cardDescHead {
+  padding: .8rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.card .cardDescBody {
+  padding: .6rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.card .cardDescFoot {
+  /*lisa*/
+  text-align: center;
+}
+.card .cardDescFoot .pried {
+  width: 11rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  float: none;
+  margin: 0;
+}
+.card .prizedHead {
+  padding: .5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.card .prizedBody {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.card .prizedFoot .pried {
+  width: 10rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+}
+.formdiv {
+  padding: 2rem 3rem;
+  color: #515151;
+  background: rgba(255, 255, 255, 0.7) url(../img/bg.png) no-repeat center center;
+  background-size: 100%;
+  display: none;
+}
+.formdiv h2 {
+  font-size: 1.7rem;
+}
+.formdiv .prizelabel {
+  height: 2.5rem;
+  font-size: 1.5rem;
+  padding: 1rem 0 0;
+}
+.formdiv .sms {
+  margin: 1.5rem 0 1rem;
+}
+.formdiv .prizeInput {
+  width: 100%;
+  height: 2.8rem;
+  padding: .5rem;
+  text-indent: 1rem;
+  border: 1px solid #515151;
+}
+.formdiv .storeSelect {
+  position: relative;
+}
+.formdiv .storeItem {
+  width: 7.6rem;
+  height: 3rem;
+  background: #fff;
+  border: 0.1rem solid #515151;
+  cursor: pointer;
+  overflow: auto;
+  outline: none;
+}
+.formdiv .storeItem .active {
+  background: #BFBFBF;
+}
+.formdiv .list2 {
+  margin-left: .6rem;
+  width: 7.6rem;
+}
+.formdiv .list3 {
+  margin-left: .6rem;
+  width: 13.8rem;
+}
+.formdiv .conAgree {
+  color: #9f9b9a;
+  padding: 3.5rem 0 2.5rem;
+}
+.formdiv .conAgree input {
+  border: 1px solid #9f9b9a;
+}
+.formdiv .userMsgBtn {
+  width: 10rem;
+}
+.formdiv .prince {
+  color: #5F9CD4;
+  cursor: pointer;
+}
+.formdiv .err {
+  border-color: #a94442;
+}
+/* lisa 结束*/
+/*奖品设置*/
+#prizeList {
+  padding: 1rem 5% 2rem;
+}
+.prizeListTitle {
+  font-size: 1.6rem;
+  padding: 1.5rem 1rem 2.5rem;
+  font-weight: 600;
+}
+.prizeListul {
+  width: 100%;
+}
+.prizeListul .prizeListLI {
+  width: 33%;
+  text-align: center;
+  float: left;
+  margin-bottom: 1rem;
+  color: #555555;
+}
+.prizeListul .imgDiv {
+  margin: 0 auto;
+  width: 70%;
+  font-size: 0;
+}
+.prizeListul .imgDiv img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: 0.5rem  0;
+}
+.prizeListul .imgDiv ~ div {
+  padding: .1rem;
+}
+
+/* 核销 */
+.redeem .content {
+  min-height: 20rem;
+  height: 35%;
+}
+.redeem .modalHead {
+  height: 25%;
+  margin-bottom: 2rem;
+}
+.redeem .modalHead h3 {
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  top: 1rem;
+}
+.redeem .modalConfirm {
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 1rem;
+}
+.redeem .redeemConfirmBtn {
+  background-color: #EBEBEB;
+  color: #41719C;
+  padding: 0.5rem 3rem;
+  border: 1px solid #41719C;
+  border-radius: 1.5rem;
+  margin-top: 1rem;
+}
+.redeem #redeemMsg {
+  padding: .5rem;
+}

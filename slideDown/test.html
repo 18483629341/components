@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./MDL.css" rel="stylesheet" type="text/css" media="screen" />
+    <title>Document</title>
+    <script>
+        function loadCSS() {
+            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|wOSBrowser|BrowserNG|WebOS)/i))) {
+                document.write('<link href="./MDL-iphone.css" rel="stylesheet" type="text/css" media="screen" />');
+                alert("IP");
+            } 
+        }
+        loadCSS();
+    </script>
+</head>
+
+<body>
+    <div id="container" style="background-color:silver; width:100px; height:100px; overflow:auto;">
+        <p style="background-color:red; height:250px; ">
+            别再做情人 做只猫 做只狗 不做情人 做只宠物至少可爱迷人 和你相交不浅无谓明日会被你憎</p>
+    </div>
+
+    <script>
+        alert(container.offsetHeight);
+        alert(container.scrollHeight);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+
+    <link href="./MDL.css" rel="stylesheet" type="text/css" media="screen" />
+    <title>Document</title>
+    <script>
+        function loadCSS() {
+            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad)/i))) {
+                document.write('<link href="./MDL-ios.css" rel="stylesheet" type="text/css" media="screen" />');
+                alert("IP");
+            } else {
+                document.write('<link href="./MDL-noios.css" rel="stylesheet" type="text/css" media="screen" />');
+                alert("非IP");
+            }
+        }
+        loadCSS();
+    </script>
+    <script src="../jquery.min.js"></script>
+</head>
+
+<body ondrag="return false">
+    <div class="container">
+        <div class="move-box">
+            <div class="qrcode-box">
+                <img class="qrcode" src="./qrcode-in.png" />
+            </div>
+            <div class="card-box">
+                <img class="card" src="./card.png" />
+                <div class="card-info">
+                    <p>陈 佳</p>
+                    <p>1560112802096117011752</p>
+                </div>
+            </div>
+            <div class="flex-box">
+                <div class="flex-list">
+                    <p>积分</p>
+                    <h2>0</h2>
+                </div>
+                <div class="flex-list">
+                    <p>优惠券</p>
+                    <h2>0</h2>
+                </div>
+            </div>
+            <div class="list-box">
+                <a class="list-li">
+                    <p>积分兑换</p>
+                    <span class="rightIcon"></span>
+                </a>
+                <a class="list-li">
+                    <p>积分活动</p>
+                    <span class="rightIcon"></span>
+                </a>
+                <a class="list-li">
+                    <p>自助服务</p>
+                    <span class="rightIcon"></span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="./movetouch.js"></script>
+    <script>
+        var body = document.querySelector('body');
+        var container = document.querySelector('.container'); //只能找到一个元素
+        var moveBox = document.querySelector('.moveBox'); //只能找到一个元素
+        var toph = '';
+        if (navigator.userAgent.match(/(phone|pad|pod|iPhone)/i)) {
+
+            // //如果是ios移动端
+
+
+            //禁止下拉  
+            var overscroll = function(el) { //前提是该元素下的子元素的内容高度比该元素的内容高度高
+                el.addEventListener('touchstart', function() {
+                    var top = el.scrollTop,
+                        totalScroll = el.scrollHeight,
+                        currentScroll = top + el.offsetHeight;
+                    //If we're at the top or the bottom of the containers  
+                    //scroll, push up or down one pixel.  
+                    //  
+                    //this prevents the scroll from "passing through" to  
+                    //the body.  
+
+                    if (top === 0) {
+                        el.scrollTop = 1
+                    } else if (currentScroll === totalScroll) {
+                        el.scrollTop = top - 1
+                    }
+
+                })
+                el.addEventListener('touchmove', function(evt) {
+                    //if the content is actually scrollable, i.e. the content is long enough  
+                    //that scrolling can occur  
+                    if (el.offsetHeight < el.scrollHeight)
+                        evt._isScroller = true
+                })
+            }
+            overscroll(container);
+            document.body.addEventListener('touchmove', function(evt) {
+                //In this case, the default behavior is scrolling the body, which  
+                //would result in an overflow.  Since we don't want that, we preventDefault.  
+                if (!evt._isScroller) {
+                    evt.preventDefault()
+
+                }
+            })
+        } else if (!(navigator.userAgent.match(/(phone|pad|pod|iPhone)/i))) { //如果不是ios系统,即andriod手机和PC端
+            alert("非ios");
+            movetouch = new moveTouch();
+            container.addEventListener(movetouch.startEvent, movetouch.startFun, false);
+            container.addEventListener(movetouch.moveEvent, movetouch.moveFun, false);
+            container.addEventListener(movetouch.endEvent, movetouch.endFun, false);
+            alert("非ios");
+        }
+    </script>
+
+</body>
+
+</html>

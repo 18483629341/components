@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #canvas {
+            background: #000;
+        }
+        
+        #nav {
+            width: 105px;
+            height: 318px;
+            position: absolute;
+            /*以下居中*/
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        
+        #nav li {
+            position: absolute;
+            left: 0;
+            right: 0;
+            list-style: none;
+            transform-origin: center bottom;
+            box-shadow: 2px 2px 20px #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <!--    ul>li*12>img[src=imags/img$.png] -->
+    <ul id="nav">
+        <li><img src="images/img1.png" alt=""></li>
+        <li><img src="images/img2.png" alt=""></li>
+        <li><img src="images/img3.png" alt=""></li>
+
+        <li><img src="images/img5.png" alt=""></li>
+        <li><img src="images/img6.png" alt=""></li>
+        <li><img src="images/img7.png" alt=""></li>
+        <li><img src="images/img8.png" alt=""></li>
+        <li><img src="images/img9.png" alt=""></li>
+        <li><img src="images/img4.png" alt=""></li>
+
+
+    </ul>
+    <script>
+        var canvas = document.getElementById("canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight + 200;
+        var con = canvas.getContext('2d');
+        var obj = [];
+        window.onload = function() {
+            var nav = document.getElementById("nav");
+            var lis = document.querySelectorAll("li");
+            var clicked = false;
+            //给封面添加点击事件
+            lis[lis.length - 1].onclick = function() {
+
+                console.log(1);
+                var v = 180 / lis.length;
+                var v = 170 / (lis.length - 1);
+
+                for (var i = 0; i < lis.length; i++) {
+                    if (!clicked) {
+                        n = parseInt(-85 + v * i);
+                    } else {
+                        n = 360;
+                    }
+                    lis[i].style.transition = '1s';
+                    lis[i].style.transform = 'rotate(' + n + 'deg)';
+                }
+                clicked = !clicked;
+
+            }
+            for (var i = 0; i < lis.length - 1; i++) {
+                lis[i].index = i;
+                lis[i].onclick = function() {
+                    this.style.transform = 'rotate(0deg)';
+                    var leftDeg = 0;
+                    var rightDeg = 15;
+
+
+                    for (var i = this.index - 1; i >= 0; i--) {
+                        leftDeg -= 15;
+                        lis[i].style.transform = 'rotate(' + leftDeg + 'deg)';
+                    }
+                    for (var i = this.index + 1; i < lis.length; i++) {
+                        console.log(rightDeg);
+                        rightDeg += 15;
+                        lis[i].style.transform = 'rotate(' + rightDeg + 'deg)';
+
+
+                    }
+
+
+                }
+
+            }
+            window.onclick = function() {
+                // console.log(2);
+                //var drawC = new DrawC();
+                // drawC.init(event);
+                //  drawC.draw();
+                //  console.log(3);
+
+
+            }
+        }
+
+
+
+        var randomColor = function() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        function random(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+        var arr = [-1, 1, 0];
+
+        function ranl() {
+            var n = Math.floor(Math.random() * 3);
+            var a = arr[n];
+            return a;
+        }
+        /*DrawC 原型 start*/
+        function DrawC() {
+            this.circles = [];
+        }
+        DrawC.prototype.init = function(e) {
+            var x = e.clientX || e.pageX;
+            var y = e.clientY || e.pageY;
+            for (var i = 0; i < this.num; i++) {
+                //this.circles.push(i);
+                this.circles[i] = {
+                    x: x + random(40, 50) * ranl(),
+                    y: y + random(40, 50) * ranl(),
+                    r: random(40, 50),
+                    vx: random(60, 70) * ranl(),
+                    vy: random(60, 70) * ranl(),
+                    vr: random(20, 30) * (-1)
+                }
+            }
+            obj.push(this.circles[i]);
+            console.log(this.circles[i].x, this.circles[i].y, this.circles[i].r);
+        }
+        DrawC.prototype.draw = function() {
+                con.clearRect(0, 0, canvas.width, canvas.height);
+                for (var i = 0; i < this.num; i++) {
+                    drawb(100, 100, 50);
+                    drawb(this.circles[i].x, this.circles[i].y, this.circles[i].r);
+                    // this.arrX[i] += this.vx;
+                    // this.arrY[i] += this.vy;
+                    // this.arrR[i] += this.vr;
+                    // if (this.arrR[i]) {
+                    //     this.arrR[i] = 0;
+                    //     this.circles[i] = null; //? 
+                    //     console.log(this.circles);
+                    // }
+
+                }
+            }
+            /*DrawC 原型 end*/
+
+
+
+        function drawb(x, y, r) {
+            con.beginPath();
+            con.arc(x, y, r, 0, Math.PI * 2);
+            con.fillStyle = randomColor();
+            con.fill();
+            console.log(1);
+        }
+    </script>
+</body>
+
+</html>

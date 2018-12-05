@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style type="text/css">
+        #imgWrap {
+            width: 700px;
+            height: 400px;
+            margin: 80px auto;
+            perspective: 800PX;
+        }
+        
+        #imgWrap img {
+            width: 80px;
+            height: 80px;
+            float: left;
+            /*消除img之间的间隙*/
+        }
+        
+        #btn {
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            font: 16px/40px '微软雅黑';
+            color: #fff;
+            margin: 0 auto;
+            padding: 0 20px;
+            background: rgb(0, 100, 0);
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="imgWrap">
+        <img src="images/1.png" alt="">
+        <img src="images/2.png" alt="">
+        <img src="images/3.png" alt="">
+        <img src="images/4.png" alt="">
+        <img src="images/5.png" alt="">
+        <img src="images/6.png" alt="">
+        <img src="images/7.png" alt="">
+        <img src="images/8.png" alt="">
+        <img src="images/9.png" alt="">
+        <img src="images/10.png" alt="">
+        <img src="images/11.png" alt="">
+        <img src="images/12.png" alt="">
+        <img src="images/13.png" alt="">
+        <img src="images/14.png" alt="">
+        <img src="images/15.png" alt="">
+        <img src="images/16.png" alt="">
+        <img src="images/17.png" alt="">
+        <img src="images/18.png" alt="">
+        <img src="images/19.png" alt="">
+        <img src="images/20.png" alt="">
+        <img src="images/21.png" alt="">
+        <img src="images/22.png" alt="">
+        <img src="images/23.png" alt="">
+        <img src="images/24.png" alt="">
+        <img src="images/25.png" alt="">
+        <img src="images/26.png" alt="">
+        <img src="images/27.png" alt="">
+        <img src="images/28.png" alt="">
+        <img src="images/29.png" alt="">
+        <img src="images/30.png" alt="">
+        <img src="images/31.png" alt="">
+        <img src="images/32.png" alt="">
+        <img src="images/33.png" alt="">
+        <img src="images/34.png" alt="">
+        <img src="images/35.png" alt="">
+        <img src="images/36.png" alt="">
+        <img src="images/37.png" alt="">
+        <img src="images/38.png" alt="">
+        <img src="images/39.png" alt="">
+        <img src="images/40.png" alt="">
+
+
+    </div>
+    <div id="btn">点击查看效果</div>
+    <script>
+        /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     运动的步骤
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     1.闪的效果（瞬间宽高都变味0，scale,随机）
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     2.图片从小到大，同时透明度从1到0(必须是上一步效果都走完了，它才会走)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      3、图旋转，同时透明度从0到1（必须是上一步效果都走完了）
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
+        var btn = document.getElementById("btn");
+        var imgs = document.querySelectorAll("img");
+        var allEnd = 0; //要想重复点击时，仍然显示动态效果，必须在方法中还原初始值
+        var on = true;
+        var endNum = 0;
+        window.onload = function() {
+
+
+                btn.onclick = function() {
+
+                    if (!on) { //当为false，就可以不执行下面的代码
+                        return;
+                    }
+                    on = false;
+
+                    // for (let i = 0; i < imgs.length; i++) { //var->let
+                    //     setTimeout(function() {
+                    //         montion(imgs[i], '1s', function() {
+                    //             imgs[i].style.transform = 'scale(0)';
+                    //         }, function() {
+                    //             console.log(1);
+                    //         });
+                    //     }, t);
+                    console.log("do");
+                    for (var i = 0; i < imgs.length; i++) {
+                        (function(i) {
+                            setTimeout(function() {
+                                montion(imgs[i], '1s', function() {
+                                    this.style.transform = 'scale(0)';
+                                }, function() {
+                                    montion(this, '1s', function() {
+                                        this.style.transform = 'scale(1)';
+                                        this.style.opacity = "0";
+                                    }, function() {
+                                        endNum++; //只要有1张图走完了，alert
+                                        if (endNum == imgs.length) {
+                                            endNum = 0;
+                                            toBe();
+                                            console.log(2);
+                                        }
+                                    })
+                                });
+                            }, Math.random() * 1000);
+                        })(i);
+                    }
+                }
+            }
+            //运动函数（运动的对象，运动时间，运动的属性函数，运动完成后的事情）；
+        function montion(obj, time, doFn, callBack) { //函数声明，非函数表达式
+            obj.style.transition = time;
+            doFn.call(obj); //调用函数，并把this的指向给obj
+            var called = false;
+            obj.addEventListener('transitionend', function() {
+                if (!called) {
+                    callBack && callBack.call(obj);
+                    called = true;
+                }
+
+            }, false);
+        }
+        //(function(i){})(i);
+        function toBe() { //这个函数用来做第三个函数
+            // imgs[2].style.transform="2s";
+            // imgs[2].style.position="relative";
+            // imgs[2].style.transform="rotateY(180)"
+            for (var i = 0; i < imgs.length; i++) {
+                console.log(1);
+                imgs[i].style.transition = '';
+
+                imgs[i].style.transform = "rotateY(0deg) translateZ(" + Math.random() * (-500) + "px)";
+                (function(i) {
+
+                    setTimeout(function() {
+                        montion(imgs[i], '2s', function() {
+                            this.style.opacity = 1;
+                            this.style.transform = "rotateY(-360deg) translateZ(0) ";
+                        }, function() {
+                            // montion(this, '1s', function() {
+                            //     this.style.transform = "rotateY(180deg) translateZ(0px) ";
+                            // })
+                            allEnd++;
+
+                            if (allEnd == imgs.length) {
+                                on = true;
+                                allEnd = 0
+                                console.log(on);
+                            }
+                        });
+                    }, Math.random() * 1000)
+                })(i);
+            }
+
+        }
+    </script>
+</body>
