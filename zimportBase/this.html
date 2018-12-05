@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+
+  </style>
+ </head>
+ <body>
+     <h1>原型中的this不是指的原型对象，而是调用对象。</h1>
+	 <h2>有对象就指向调用对象  ; 用new构造就指向新对象
+       没调用对象就指向全局对象window---函数没有所属对象：指向全局对象<strike>global</strike>window
+      
+     通过 apply 或 call 或 bind 来改变 this 的所指。</h2>
+     <script type="text/javascript">
+	 /********************有对象就指向调用对象******************************/
+	    
+        var story={
+		   progress:"unknown",
+		   start:function(){
+		     this.progress="start";
+		   }
+		}
+		//story.start();
+		//console.log(story.progress);//start
+         
+		 var start=story.start;//仅仅把方法赋值给它！！！！这里没有对象
+		start();  //此时调用对象未知
+         console.log(story.progress);//unknown
+		var store={
+		   progress:"unknown",
+		   start:function(){
+		     store.progress="start";
+		   }
+		}
+		//store.start();
+		//console.log(store.progress);//start
+		 var start=store.start;
+		start();  
+         console.log(store.progress);//start
+     /***************用new构造就指向新对象****************/
+	     //构造函数
+	   var storg=function(){}
+	   storg.prototype={
+	         progress:"unknown",
+		   start:function(){
+		     this.progress="start";}
+	   };
+        var myStorg=new storg();
+           myStorg.start();
+           console.log(myStorg.progress);//start
+		   console.log(storg.progress);//undefined未定义
+		   console.log(myStorg.hasOwnProperty("progress"));
+		   console.log(myStorg.hasOwnProperty("start"));//方法是不会成为他的关键字
+		   console.log(myStorg);//object,  progress:"unknown",
+           console.log(storg);//function(){}
+		   console.log(storg.prototype);//object.....
+		/***************函数没有所属对象：指向全局对象global****************/
+		   var myObject={value:100};
+		      myObject.getValue=function(){
+			     var foo=function(){
+				    console.log(this.value);                           //undedined           
+                    console.log(this);                                  //window
+				 }
+				 foo();
+				 return this.value;                                      //100
+			  }
+			  console.log( myObject.getValue());
+		/************ 通过 apply 或 call 或 bind 来改变 this 的所指*********/ 
+		 var myObject={value:100};
+		     
+		 var foo=function(){
+	         console.log(this); 
+		  }                                    
+            foo();
+
+			foo.apply(myObject);//Object{value:100}
+			foo.call(myObject);	//Object{value:100}
+	        var newFoo=foo.bind(myObject);
+            newFoo();//Object{value:100}
+
+
+	 document.onkeydown=function(e){	//对整个页面文档监听
+		 var keyNum=window.event ? e.keyCode :e.which;		//获取被按下的键值
+		 //判断如果用户按下了回车键（keycody=13）
+		 if(keyNum==13){
+			 alert('您按下了回车');
+		 }
+		 //判断如果用户按下了空格键(keycode=32)，
+		 if(keyNum==32){
+			 alert('您按下了空格');
+		 }
+	 }
+	 /**
+	  * Created by lisa on 2017/8/10.
+	  
+	 var
+	 function  Introduce(name){
+		 var this.name=name;
+
+		 return function(){
+			 console.log("大家好，我是"+this.name);
+
+		 }
+	 }
+	 var lilei=new Introduce("john");
+	 lilei();
+
+    
+	 funciton Human(age){
+	    this.age=age;
+	 }
+	 let greg=new Human(26);
+	 let tomas=new Human(29);
+	 console.log(greg);*/
+     </script>
+
+
+ </body>
+</html>

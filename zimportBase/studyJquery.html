@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+     <script type="text/javascript" src="jquery.js">
+     <!--
+		
+     //-->
+     </script>
+	 <script type="text/javascript">
+	 window.status = "put your message here"
+	 console.log($());
+	 //工厂函数:当一个函数返回一个对象时，我们称之他为 工厂函数(factory function) 。
+	  var aQuery=function(selector,context){
+	      return aQuery.prototype.init();
+	  }
+	  aQuery.prototype={
+	     init:function(){
+			 this.age=18
+		    return this;//此句很关键  -- 链式调用
+			console.log(this);
+
+		 },
+		 name:function(){
+		    return this;
+			var a=this.age;
+             console.log(a);
+		 },
+		 age:20
+
+	  }
+	   aQuery().age;
+	   console.log( aQuery().age);//18
+
+	    //console.log( aQuery().init().name());
+
+       //分析二：链式调用
+	   //aQuery.prototype.init.prototype = aQuery.prototype;
+	   // console.log( aQuery().init().name());
+		 console.log( aQuery().name());
+	    //http://www.cnblogs.com/aaronjs/p/3278578.html
+		new.window("http://www.w3school.com.cn","window2")
+	 </script>
+ </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body><script type="text/javascript">
+
+	function add(x) {
+		var sum = x;
+		var tmp = function (y) {
+			sum = sum + y;
+			return tmp;
+		};
+		tmp.toString = function () {
+			return sum;
+		};
+		return tmp;
+	}
+
+
+    function  multip(x){
+	   var mul = x;
+		var tmp = function (y) {
+			mul = mul * y;
+			return tmp;
+		};
+		tmp.toString = function () {    
+			return mul;
+		};
+		return tmp;
+	};
+
+	/* var add = function(a){
+		return function(b){
+			return function(c){
+			   return a+b+c;
+			};
+		};
+	    };*/
+		
+  console.log(add(2)(20)(30)(40));
+  console.log(multip(2)(3));
+  //add(1)(2)(3); //报错，不是一个方法
+  console.log("i'm a lasagna hog".split("").reverse().join(" ")); 
+  console.log( window.foo || ( window.foo = "bar" ) ); 
+  var foo = "Hello"; (function() { var bar = " World"; alert(foo + bar); })(); //
+  //alert(foo + bar); //报错，不是一个方法
+  var foo2 = {}; 
+  foo2.bar = 'hello'; 
+   console.log(foo2.length);  //undefined   对象是不能用长度来
+  
+
+ </script>
+  
+ </body>
+</html>

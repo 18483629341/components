@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        setTimeout(function() {
+
+
+
+            setTimeout(function() {
+                arguments.callee;
+                console.log("小马");
+            }, 1000);
+            console.log("小马");
+
+        }, 1000)
+        var i = 0;
+        setInterval(function() {
+            console.log("小马" + i);
+            i++;
+            setTimeout(function() {
+                arguments.callee;
+                console.log("小马");
+            }, 1000); //并没有经过1000ms,再执行外层函数
+
+
+        }, 1000);
+    </script>
+</body>
+
+</html>

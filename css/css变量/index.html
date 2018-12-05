@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+         :root {
+            --main-color: #4d4e53;
+            --main-bg: rgb(255, 255, 255);
+            --logo-border-color: rebeccapurple;
+            --header-height: 68px;
+            --content-padding: 10px 20px;
+            --base-line-height: 1.428571429;
+            --transition-duration: .35s;
+            --external-link: "external link";
+            --margin-top: calc(2vh + 20px);
+            --hoverback: #AFC7CE;
+            --pad: 10px 15px 20px;
+            --bar: "hello";
+            --foo: var(--bar)' world';
+            --gap: 20;
+        }
+        
+        body {
+            --primary: #2d4e6f;
+            background: var(--main-bg, #7F583F);
+            color: var(--main-color);
+            transition: all 1s;
+            border: ( '1px solid 'var(--primary));
+        }
+        
+        .header:after {
+            content: var(--foo);
+            position: relative;
+        }
+        
+        body:hover {
+            background: var(--hoverback);
+        }
+        
+        .header {
+            /* border: "1px  solid" var(--logo-border-color); */
+            padding: var(--pad, 10px 15px 20px);
+        }
+        
+        .mt {
+            margin-top: calc(var(--gap)*1px);
+            border: 1px solid lightgreen;
+        }
+        
+        .change {
+            --primary: #C672DF;
+            background: var(--primary);
+        }
+        
+        .move {
+            border: 1px solid lightgreen;
+            width: 500px;
+            height: 200px;
+            position: relative;
+        }
+        
+        .demo {
+            --mouse-x: 10;
+            --mouse-y: 10;
+            position: absolute;
+            left: calc(var(--mouse-x)*1px);
+            top: calc(var(--mouse-y)*1px);
+        }
+        
+        @media screen and (min-width:768px) {
+             :root {
+                --main-color: #939FCF;
+                --main-bg: rgb(250, 246, 242);
+                --logo-border-color: #997FB3;
+                --hoverback: rgba(236, 198, 221, 0.88);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <provide class="header">body</p>
+        <p class="mt">margin-top</p>
+        <button onclick="jsChange()" class="change">change</button>
+        <!-- <script type="text/javascript" src="a.js"></script> -->
+        <div class="move">
+            <button class="demo">follow me</button>
+        </div>
+
+</body>
+<script>
+    const demoStyle = document.getElementsByClassName("demo")[0].style;
+    const moveE = document.getElementsByClassName("move")[0];
+    console.log(moveE.offsetTop, moveE.offsetLeft);
+    moveE.addEventListener('mousemove', (e) => {
+        demoStyle.setProperty('--mouse-x', (e.clientX - moveE.offsetTop));
+        demoStyle.setProperty('--mouse-y', (e.clientY - moveE.offsetLeft));
+    });
+
+    function jsChange() {
+
+        document.getElementsByClassName("change")[0].style.setProperty('--primary', '#fff');
+        // 读取变量
+        //document.body.style.getPropertyValue('--primary').trim();
+        // 删除变量
+        //document.body.style.removeProperty('--primary');
+
+
+    }
+</script>
+
+</html>

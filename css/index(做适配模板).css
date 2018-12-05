@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+}
+body,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd,
+p,
+pre {
+  margin: 0;
+  padding: 0;
+}
+image {
+  vertical-align: bottom;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.2rem;
+  background: #666;
+  transition: all 500ms linear;
+}
+img {
+  max-width: 100%;
+}
+@media only screen and (min-width: 320px) {
+  html {
+    font-size: 53.33% !important;
+  }
+}
+@media only screen and (min-width: 360px) {
+  html {
+    font-size: 60% !important;
+  }
+}
+@media only screen and (min-width: 384px) {
+  html {
+    font-size: 64% !important;
+  }
+}
+@media only screen and (min-width: 400px) {
+  html {
+    font-size: 66.7% !important;
+  }
+}
+@media only screen and (min-width: 414px) {
+  html {
+    font-size: 69% !important;
+  }
+}
+@media only screen and (min-width: 424px) {
+  html {
+    font-size: 70.7% !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  html {
+    font-size: 81.7% !important;
+  }
+}
+@media only screen and (min-width: 540px) {
+  html {
+    font-size: 90% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  html {
+    font-size: 93.5% !important;
+  }
+}
+@media only screen and (min-width: 641px) {
+  html {
+    font-size: 100% !important;
+  }
+}

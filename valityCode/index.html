@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas">
+
+    </canvas>
+
+</body>
+<script src="./zCode.js">
+</script>
+<script src="./zcodeMain.js">
+</script>
+<script>
+    // window.onload = function() {
+
+    //     drawLine();
+    //     drawCircle();
+    //     draw();
+
+    // }
+    // var canvas = document.getElementById("canvas");
+    // var context = canvas.getContext('2d');
+    // canvas.width = 120;
+    // canvas.height = 40;
+
+
+    // function draw() {
+    //     //context.fillStyle = "#fff";
+    //     context.strokeRect(0, 0, canvas.width, canvas.height);
+    //     var aCode = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+    //     for (var i = 0; i < 4; i++) {
+    //         var index = Math.floor(Math.random() * aCode.length);
+    //         var txt = aCode[index];
+    //         var x = 20 + i * 20;
+    //         var y = 25;
+    //         if (isNaN(txt)) {
+    //             txt = txt.toUpperCase();
+    //             console.log(txt);
+    //         }
+    //         context.fillStyle = ranColor();
+    //         context.font = 'bold 20px 微软雅黑';
+
+    //         context.fillText(txt, x, y);
+    //     }
+
+    // }
+
+    // function drawLine() {
+    //     for (var i = 0; i < 8; i++) {
+
+    //         context.beginPath();
+    //         context.moveTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height));
+    //         context.lineTo(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() * canvas.height));
+    //         context.fillStyle = ranColor();
+    //         context.stroke();
+    //         context.closePath();
+    //     }
+
+    // }
+
+    // function drawCircle() {
+    //     for (var i = 0; i < 20; i++) {
+    //         var color = ranColor();
+    //         context.lineWidth = 2;
+
+    //         context.beginPath();
+    //         var x = Math.floor(Math.random() * canvas.width);
+    //         var y = Math.floor(Math.random() * canvas.height);
+    //         context.moveTo(x, y);
+    //         context.lineTo(x + 1, y + 1);
+    //         context.fillStyle = color;
+    //         context.stroke();
+    //     }
+    // }
+
+    // function ranColor() {
+    //     var r = Math.floor(Math.random() * 256);
+    //     var g = Math.floor(Math.random() * 256);
+    //     var b = Math.floor(Math.random() * 256);
+    //     if (r == 255 && g == 255 && b == 255) {
+
+    //         return 'rgb(0,0,0)';
+    //     }
+    //     var color = 'rgb(' + r + "," + g + "," + b + ")";
+    //     return color;
+    // }
+</script>
+
+</html>
