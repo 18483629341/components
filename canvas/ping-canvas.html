@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style>
+        .dragIn {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            left: 200px;
+            top: 50px;
+            background: #fff;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas class="js-drag dragIn" id="canvas">
+       
+    </canvas>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext('2d');
+        var imgs = [];
+        var eles = [
+            [0, 20, 29, 26],
+            [20, 100, 29, 26],
+            [100, 50, 29, 26],
+            [50, 10, 29, 26],
+            [60, 80, 57, 53]
+        ]; //存放图片的信息；
+        initDraw();
+
+        function initDraw() { //绘制所有的图形
+            eles.forEach(function(item, index) {
+                draw(index + 1, item[0], item[1], item[2], item[3]);
+            }, this);
+            // draw(0, 0);
+        }
+
+        function draw(i, x, y, w, h) { //画一个图形
+
+            var img = new Image();
+
+            img.src = "./image/" + i + ".png"; //图片名
+            img.onload = function() {
+                console.log(1);
+                ctx.drawImage(img, x, y, w, h);
+                console.log(2);
+            }
+            imgs.push([img, x, y, w, h]);
+
+        }
+        // canvas.ontouchstart = function(e) {
+        //     alert("touch start");
+        // };
+        var a0 = null;
+        canvas.onmousedown = function(e) {
+            console.log(1);
+            event.preventDefault();
+            a0 = getCanvasPos(canvas, e);
+
+            moveDraw(a0);
+
+            canvas.onmousemove = function(e) {
+
+                // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // var at = getCanvasPos(canvas, e);
+                // moveDraw(at);
+
+
+
+                // init(5.5 + (at.x - a0.x), 5.5 + (at.y - a0.y), 50, 50);
+
+            }
+            canvas.onmouseup = function() {
+
+            }
+        }
+
+        function moveDraw(at) { //绘制移动后所有的图形    
+            var ImageNo = false;
+            hasActive(at); //判断事件坐标在      
+            //无activeele的
+            // if()
+            // //有activeele的
+            // eles.forEach(function(item, index) {
+            //     draw(index + 1, item[0], item[1], item[2], item[3]);
+            // }, this);
+            //返回移动后的坐标
+            function hasActive(at) {
+                console.log(at.x, at.y);
+                eles.forEach(function(item, index) {
+                    console.log((at.x > item[0] && at.x < (item[0] + item[2])), (at.y > item[1] && at.y < (item[1] + item[3])));
+                    if (at.x > item[0] && at.x < (item[0] + item[2])) {
+                        if (at.y > item[1] && at.y < (item[1] + item[3])) {
+                            ImageNo = index + 1;
+                            console.log(ImageNo);
+                            return ImageNo;
+
+                        }
+                    }
+                }, this);
+            }
+        }
+
+
+        function getCanvasPos(canvas, e) { //获取鼠标在canvas上的坐标    
+            var rect = canvas.getBoundingClientRect();
+            // var leftB = parseInt(getComputedStyle(canvas).borderLeftWidth); //获取的是样式，需要转换为数值
+            // console.log(2, e.clientX, rect.left, canvas.borderLeftWidth, leftB, rect.top);
+            // var topB = parseInt(canvas.borderTopWidth);
+            return {
+                x: (e.clientX - rect.left),
+                y: (e.clientY - rect.top)
+            };
+
+        }
+    </script>
+
+    <script>
+        //下面拖到上面
+        var dragDiv1 = document.getElementById("dragDiv1");
+
+
+        function drag(e) {
+            e.dataTransfer.setData("img", e.target.id);
+            console.log(1);
+        }
+
+        function allowDrop(e) {
+            e.preventDefault();
+            console.log(2);
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            var data = e.dataTransfer.getData('img');
+            dragDiv1.appendChild(document.getElementById(data));
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>

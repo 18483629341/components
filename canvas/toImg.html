@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas-图像截取</title>
+    <style>
+        canvas {
+            border: 1px dashed red;
+            float: left;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cantox" style="position: relative">
+        <canvas id="oldcanvas" width="500px" height="300px"> 
+    </canvas>
+        <div id="cliptox" style="position: absolute;display:none"></div>
+    </div>
+    <button id="btnclip" style="float: left">截取该区域</button>
+    <canvas id="nowcanvas" width="500px" height="300px"> 
+  </canvas>
+
+    <script>
+        //获取div元素 
+        var cantox = document.getElementById("cantox");
+        var cliptox = document.getElementById("cliptox");
+        var btnclip = document.getElementById("btnclip");
+        //获取到canvas元素 
+        var oldcanvas = document.getElementById("oldcanvas");
+        var nowcanvas = document.getElementById("nowcanvas");
+        //获取canvas中的画图环境 
+        var oldcontext = oldcanvas.getContext('2d');
+        var nowcontext = nowcanvas.getContext('2d');
+
+        var img = new Image();
+        img.src = "./img/7.jpg";
+
+        //加载图像到canvas画布中 
+        window.onload = function() {
+            oldcontext.drawImage(img, 0, 0, oldcanvas.width, oldcanvas.height);
+        }
+        var startPoint; //截取图像开始坐标 
+        var endPoint; //截图图像的结束坐标 
+        var w; //截取图像的宽度 
+        var h; //截取图像的高度 
+        var flag = false; //用于判断移动事件事物控制 
+        //鼠标按下事件 
+        cantox.onmousedown = function(e) {
+            flag = true;
+            cliptox.style.display = 'block';
+            startPoint = windowToCanvas(oldcanvas, e.clientX, e.clientY);
+            cliptox.style.left = startPoint.x + 'px';
+            cliptox.style.top = startPoint.y + 'px';
+        }
+
+        //鼠标移动事件 
+        cantox.onmousemove = function(e) {
+                if (flag) {
+                    cliptox.style.background = 'rgba(0,0,0,0.5)';
+                    endPoint = windowToCanvas(oldcanvas, e.clientX, e.clientY);
+                    w = endPoint.x - startPoint.x;
+                    h = endPoint.y - startPoint.y;
+                    cliptox.style.width = w + 'px';
+                    cliptox.style.height = h + 'px';
+                }
+            }
+            //鼠标释放事件 
+        cantox.onmouseup = function(e) {
+            flag = false;
+        }
+
+        //按钮截取事件 
+        btnclip.onclick = function() {
+            imgCut(nowcontext, img, oldcanvas.width, oldcanvas.height, startPoint.x, startPoint.y, w, h);
+        }
+
+        /* 
+         * 图像截取函数 
+         * context:绘制环境对象 
+         * image：图像对象 
+         * imgElementW：图像显示的宽度 
+         * imgElementH：图像显示的高度 
+         * sx:截取图像的开始X坐标 
+         * sy:截取图像的开始Y坐标 
+         * w:截取图像的宽度 
+         * h:截取图像的高度 
+         * */
+        function imgCut(context, image, imgElementW, imgElementH, sx, sy, w, h) {
+            //清理画布，便于重新绘制 
+            context.clearRect(0, 0, imgElementW, imgElementH);
+            //计算 ：比例 = 原图像/显示图像 
+            var ratioW = image.width / imgElementW;
+            var ratioH = image.height / imgElementH;
+            //根据截取图像的所占位置及大小计算出在原图所占的位置及大小 
+            //.drawImage(图像对象,原图像截取的起始X坐标,原图像截取的起始Y坐标,原图像截取的宽度,原图像截取的高度， 
+            // 绘制图像的起始X坐标,绘制图像的起始Y坐标,绘制图像所需要的宽度,绘制图像所需要的高度); 
+            context.drawImage(image, ratioW * sx, ratioH * sy, ratioW * w, ratioH * h, 0, 0, w, h);
+        }
+
+        /* 
+         * 坐标转换：将window中的坐标转换到元素盒子中的坐标，并返回(x,y)坐标 
+         * element：canvas元素对象 
+         * x:鼠标在当前窗口X坐标值 
+         * y:鼠标在当前窗口Y坐标值 
+         * */
+        function windowToCanvas(element, x, y) {
+            //获取当前鼠标在window中的坐标值 
+            // alert(event.clientX+"-------"+event.clientY); 
+            //获取元素的坐标属性 
+            var box = element.getBoundingClientRect();
+            var bx = x - box.left;
+            var by = y - box.top;
+            return {
+                x: bx,
+                y: by
+            };
+        }
+        //js中getBoundingClientRect的作用及兼容方案    https://www.cnblogs.com/limeiky/p/6179964.html
+        function getObjXy(obj) {
+            var xy = obj.getBoundingClientRect();
+            var top = xy.top - document.documentElement.clientTop + document.documentElement.scrollTop, //document.documentElement.clientTop 在IE67中始终为2，其他高级点的浏览器为0
+                bottom = xy.bottom,
+                left = xy.left - document.documentElement.clientLeft + document.documentElement.scrollLeft, //document.documentElement.clientLeft 在IE67中始终为2，其他高级点的浏览器为0
+                right = xy.right,
+                width = xy.width || right - left, //IE67不存在width 使用right - left获得
+                height = xy.height || bottom - top;
+
+            return {
+                top: top,
+                right: right,
+                bottom: bottom,
+                left: left,
+                width: width,
+                height: height
+            }
+        }
+        var test = getObjXy(document.getElementById('test'));
+        alert("top:" + test.top + ", right:" + test.right + ", bottom:" + test.bottom + ", left:" + test.left);
+    </script>
+</body>
+
+</html>

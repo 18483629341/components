@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style>
+        #dragDiv1 {
+            width: 400px;
+            height: 400px;
+            background: #ccc;
+            position: relative;
+            margin: 20px;
+        }
+        
+        #drag1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+        }
+        
+        .box {
+            border: 1px dashed black;
+            position: absolute;
+        }
+        
+        .imgDiv {
+            border: 1px dotted blueviolet;
+            width: 500px;
+            height: 400px;
+        }
+        
+        #dragIn {
+            /* background: url(./image/timg.jpg) center center no-repeat; */
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="dragDiv1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        11111111111111111111
+        <div id="drag1">拖拽2-带框拖拽</div>
+    </div>
+    <div class="imgDiv" id="dragOut" ondragover="allowDrop(event)">
+        <img src="./image/1.png" id="img1" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/2.png" id="img2" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/3.png" id="img3" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/4.png" id="img4" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/5.png" id="img5" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/6.png" id="img6" alt="" class="image" draggable="true" ondragstart="drag(event)">
+        <img src="./image/7.png" id="img7" alt="" class="image" draggable="true" ondragstart="drag(event)">
+    </div>
+
+
+    <!-- <script src="./js/jquery.js"></script> -->
+
+    <script type="text/javascript">
+        //设备判断模块 
+
+        window.onload = function() {
+            //拖拽3:结合DOM,带框的拖拽
+            var oDragDiv1 = document.getElementById('dragDiv1');
+            var oDrag1 = document.getElementById('drag1');
+            oDrag1.onmousedown = function(ev) {
+                var oEvent = ev || event;
+                var pos = getMousePosition(oEvent);
+                var disX = pos.x - oDrag1.offsetLeft;
+                var disY = pos.y - oDrag1.offsetTop;
+                //定义拖出来的框
+                var oBox = document.createElement('div');
+                oBox.className = 'box';
+                oBox.style.width = oDrag1.offsetWidth - 2 + 'px';
+                oBox.style.height = oDrag1.offsetHeight - 2 + 'px';
+                //每次拖动时,给虚框div的初始位置和红色实体初始位置相同,防止虚框闪动
+                oBox.style.left = oDrag1.offsetLeft + 'px';
+                oBox.style.top = oDrag1.offsetTop + 'px';
+                oDragDiv1.appendChild(oBox);
+                if (oBox.setCapture) {
+                    //兼容IE7-11
+                    oBox.onmousemove = Mousemove;
+                    oBox.onmouseup = mouseUp;
+                    oBox.setCapture();
+                } else {
+                    //兼容FF,Chrome
+                    document.onmousemove = Mousemove;
+                    document.onmouseup = mouseUp;
+                }
+
+                function getMousePosition(ev) {
+                    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+                    return {
+                        x: ev.clientX + scrollLeft,
+                        y: ev.clientY + scrollTop
+                    };
+                };
+                //合并代码
+                function Mousemove(ev) {
+                    var oEvent = ev || event
+                    var pis = getMousePosition(oEvent);
+                    var l = pis.x - disX;
+                    var t = pis.y - disY;
+
+                    //3.限制范围,磁性吸附,快接近父级时,自动吸附上去
+                    if (l < 30) {
+                        l = 0;
+                    } else if (l > oDragDiv1.offsetWidth - oBox.offsetWidth) {}
+                    if (t < 30) {} else if (t > oDragDiv1.offsetHeight - oBox.offsetHeight) {
+                        t = oDragDiv1.offsetHeight - oBox.offsetHeight;
+                    }
+                    oBox.style.left = l + 'px';
+                    oBox.style.top = t + 'px';
+
+                };
+
+                function mouseUp() {
+                    //当鼠标抬起时,mousemove/up清空
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+                    oDrag1.style.left = oBox.offsetLeft + 'px';
+                    oDrag1.style.top = oBox.offsetTop + 'px';
+                    oDragDiv1.removeChild(oBox);
+
+                    if (oBox.releaseCapture) {
+                        oBox.releaseCapture();
+
+                    }
+
+                };
+
+                return false; //FF中阻止默认行为
+
+            };
+
+        }
+    </script>
+
+
+    <script>
+        //下面拖到上面
+        var dragDiv1 = document.getElementById("dragDiv1");
+
+
+        function drag(e) {
+            e.dataTransfer.setData("img", e.target.id);
+            console.log(1);
+        }
+
+        function allowDrop(e) {
+            e.preventDefault();
+            console.log(2);
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            var data = e.dataTransfer.getData('img');
+            dragDiv1.appendChild(document.getElementById(data));
+        }
+    </script>
+</body>
+
+</html>
