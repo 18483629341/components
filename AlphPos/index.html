@@ -1,0 +1,163 @@
+
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>百度翻译</title>
+  <meta name="keywords" content="翻译,在线翻译,百度翻译,词典,英语,">
+  <meta name="description" content="百度翻译提供即时免费的多语种文本翻译和网页翻译服务，支持中、英、日、韩、泰、法、西、德等28种热门语言互译，覆盖756个翻译方向。">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  
+  </head>
+  <body>
+  
+  <form class="survey_form newform">
+    <div id="problemContainer">
+        <div id="likert1000" class="likert form-group">
+          
+            <label class="frmquestion cstm_frmquestion desc" id="title1000" for="Field1000">安徽大学_A</label> 
+            <div style="width:100%;height:500px;"></div>
+        </div>
+        <div id="likert1000" class="likert form-group">
+         
+            <label class="frmquestion cstm_frmquestion desc" id="title1000" for="Field1000">安徽大学_B</label> 
+            <div style="width:100%;height:500px;"></div>
+        </div>
+    </div>
+     
+  </form>
+  </body>
+  </html>
+<<script src="../jquery.min.js"></script>
+<script type="text/javascript">
+                // <![CDATA[
+                $(function () {
+                  initAlphaNav()
+
+                  function initAlphaNav() {
+                    var letter;
+                    var panelHtml;
+
+                    $(".survey_form.newform").each(function () {
+                      var ranId = ranNum = Math.floor(Math.random() * 100000);
+                      $(this).attr('data-id', ranId);
+                      letter = [];
+                      $(this).find('.cstm_frmquestion').each(function () {
+                        var text = $(this).text().split("_")
+                        var name = text[0]
+                        var firstLetter = text[1].toUpperCase();
+                        $(this).text(name)
+                        if (jQuery.inArray(firstLetter, letter) == -1) {
+                          letter.push(firstLetter);
+                          $(this).parent().prepend('<a name="' + ranId + firstLetter + '"></a>');
+                        }
+                      })
+                    
+                      panelHtml = '<div class="an-panel">';
+                      for (i = 0; i < letter.length; i++) {
+                        panelHtml += '<a href="#' + letter[i] + '" data-id="' + ranId + '">' + letter[i] +
+                          '</a>'
+                      }
+                      panelHtml += '</div>';
+                      //由prepend改為append，保證滾動條根據下拉列表狀態顯示或隱藏
+                      $("body").append(panelHtml);
+
+                      $('.an-panel a').click(function () {
+                        var target = $(this).attr('href').replace('#', '');
+                        target = $(this).data('id') + target;
+                        $('html, body').stop().animate({
+                          scrollTop: $('[name="' + target + '"]').offset().top - 100
+                        }, 500);
+                        return false;
+                      })
+                      var height = document.body.offsetHeight - 200
+                      $(".an-panel").css('height', height + 'px')
+                      var timer = '';
+                      window.onresize = function () {
+                        if (timer) {
+                          clearTimeout(timer)
+                        }
+                        timer = setTimeout(function () {
+                          //滚动条位置
+                          var height = document.body.offsetHeight
+                          $(".an-panel").css('height', height + 'px')
+                          timer = undefined;
+                        }, 1000)
+                      }
+                      //1
+                    })
+                    //2
+                  }
+
+
+                  $("input[id*=Field]").on('ifChanged', function () {
+                    var result = [];
+                    $("input[id*=Field]:checked").each(function (k, v) {
+                      result.push(v.id)
+                    })
+                    localStorage["swjtuform0002"] = JSON.stringify(result)
+                  })
+
+                  if (localStorage["swjtuform0002"]) {
+                    setTimeout(function(){
+                      var list = JSON.parse(localStorage["swjtuform0002"])
+                      $.each(list, function (k, v) {
+                        $('#' + v).iCheck('check');
+                      })
+                    },1000)
+                  }
+                })
+
+                // ]]>
+              </script>
+
+
+<style>
+  /* 2018/11/20 only for xinanjiaoda */
+.an-panel {
+ position: fixed;
+ top: 70px;
+ right: 0;
+ z-index: 1000;
+ width: 12%;
+ text-align: center;
+ margin: 0 -10px;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+   overflow: auto;
+   -webkit-overflow-scrolling: touch; 
+} 
+.collapsed~.an-panel{
+  display: none!important;
+}
+.an-panel a {
+ display: block;
+        font-size:14px;
+ height:1.6em;
+ flex: 0 1 auto;
+}
+.frmquestion.cstm_frmquestion.desc{
+  text-align:center
+}
+
+/****  input[type="radio"]  self write****/
+input[type="radio"]{
+  display:inline-block;
+  width:24px;
+  height:24px;
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+ background:url(https://imgsrv1.mailer08.net/images/dGVuYW50MzM4YWRtaW4_/WTJGdGNHRnBaMjVmTVRjPQ/radio_def.png) no-repeat;
+  background-size:100% 100%;
+}
+input[type="radio"]:hover{
+ background:url(https://imgsrv1.mailer08.net/images/dGVuYW50MzM4YWRtaW4_/WTJGdGNHRnBaMjVmTVRjPQ/radio_hover.png) no-repeat;
+  background-size:100% 100%;
+}
+input[type="radio"]:checked{
+ background:url(https://imgsrv1.mailer08.net/images/dGVuYW50MzM4YWRtaW4_/WTJGdGNHRnBaMjVmTVRjPQ/radio_checkd.png) no-repeat;
+  background-size:100% 100%;
+}
+</style>
