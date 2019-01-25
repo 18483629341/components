@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <style>
+        .list1,
+        .list2 {
+            width: 200px;
+            height: 40px;
+        }
+        
+        .list3 {
+            width: 300px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <select class="list1" name="" id=""></select>
+        <select class="list2" name="" id=""></select>
+        <select class="list3" name="" id=""></select>
+    </div>
+    <script src="../jquery.min.js"></script>
+    <script>
+        var inTheBox = false;
+        var data = {
+            "四川省": {
+                "成都市": {
+                    "华阳店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城5"
+                    },
+                    "伊藤店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城6"
+                    }
+                },
+                "绵阳市": {
+                    "绵阳店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城7"
+                    },
+                    "新华店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城8"
+                    }
+                }
+            },
+            "山东省": {
+                "济南市": {
+                    "绵阳店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城1"
+                    },
+                    "新华店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城2"
+                    }
+                },
+                "济宁市": {
+                    "绵阳店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城3"
+                    },
+                    "新华店": {
+                        "id": 123,
+                        "phone": "18483629341",
+                        "address": "美丽的蓉城4"
+                    }
+                }
+            }
+        }
+        //addressDropDown()
+        getStoreId()
+
+        function getStoreId() {
+            var storeList = ''
+
+            storeList = data
+
+            // $("#prize").on('click', '[name=store_id]', function () {
+            // inTheBox = true;
+            // var list1, list2, list3; //省 市 门店
+            var ak1, ak2, ak3; //选中的门店
+            // if (!list1) {
+            //     list1 = $("<select class='list1 storeItem' style='left:0'></select>")
+            //     $(this).parent().append(list1)
+            // }
+            var list1Lis = '',
+                list2Lis = '',
+                list3Lis = '';
+            list1Lis += '<option disabled selected> 省</option>'
+            for (var k in storeList) {
+                list1Lis += '<option>' + k + '</option>'
+            }
+            $('.list1').html(list1Lis).on('change', function() {
+                    console.log(list1Lis)
+
+                    $('.list2').html('')
+                    $('.list3').html('')
+                        // if (!list2) {
+                        //     list2 = $("<select class='list2 storeItem' style='left:25%'></select>")
+                        //     $(this).parents('.storeSelect').append(list2)
+                        // }
+                    list2Lis = ''
+                    ak1 = $('.list1').val()
+                    list2Lis += '<option disabled selected> 市</option>'
+                    list3Lis += '<option disabled selected> 请选择具体门店</option>'
+                    for (var k2 in storeList[ak1]) {
+                        list2Lis += '<option>' + k2 + '</option>'
+                    }
+                    $('.list3').html(list3Lis);
+                    $('.list2').html(list2Lis).on('change', function() {
+                        // if (!list3) {
+                        //     list3 = $("<select class='list3 storeItem' style='left:50%'></select>")
+                        //     $(this).parents('.storeSelect').append(list3)
+                        // }
+                        console.log(list2Lis)
+
+                        list3Lis = ''
+                        ak2 = $('.list2').val()
+                        list3Lis += '<option disabled selected> 请选择具体门店</option>'
+                        for (var k3 in storeList[ak1][ak2]) {
+                            list3Lis += '<option class="' + k3 + '">' + storeList[ak1][ak2][k3].address + '</option>'
+                        }
+                        console.log(storeList[ak1][ak2][k3])
+                        $('.list3').html(list3Lis).on('change', function() {
+
+
+                            var nk3;
+                            ak3 = $(this).val();
+                            nk3 = $(this).find('option:selected').attr("class")
+                                // a.store_id = storeList[ak1][ak2][nk3].id
+                                // a.store_name = ak3
+                                // a.store_phone = storeList[ak1][ak2][nk3].phone
+                                // a.store_address = storeList[ak1][ak2][nk3].address
+                                // if (ak1 == ak2) {
+                                //     $('[name=store_id]').val(ak2 + '/' + ak3)
+                                // } else {
+                                //     $('[name=store_id]').val(ak1 + '/' + ak2 + '/' + ak3)
+                                // }
+                                // $('.storeItem').remove();
+                        })
+                    })
+                })
+                // })
+
+
+
+        }
+
+        //监控鼠标与下拉框关系
+        function addressDropDown() {
+            $('#prize').on('mouseenter', '.storeSelect', function() {
+                inTheBox = true;
+                console.log("inTheBox")
+            })
+            $('#prize').on('mouseleave', '.storeSelect', function() {
+                inTheBox = false
+                console.log("inTheBox")
+
+            })
+            $(document).click(function() {
+                if (!inTheBox) {
+                    $('.storeItem').remove()
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

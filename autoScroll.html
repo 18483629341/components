@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 此页面作为所有页面的模板页面参考 -->
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>自动滚动</title>
+	<style>
+	ui,li {
+    list-style: none;
+	}
+	#news{
+		height: 75px;
+		overflow: hidden;
+	}
+	</style>
+</head>
+
+<body>
+		<div id="news">
+				<ul>
+					<li><a href="#" title="aaaaaaaaaaaaaaa">aaaaaaaaaaaaaaa</a></li>
+					<li><a href="#" title="bbbbbbbbbbbbbbb">bbbbbbbbbbbbbbb</a></li>
+					<li><a href="#" title="ccccccccccccccc">ccccccccccccccc</a></li>
+					<li><a href="#" title="ddddddddddddddd">ddddddddddddddd</a></li>
+					<li><a href="#" title="eeeeeeeeeeeeeee">eeeeeeeeeeeeeee</a></li>
+					<li><a href="#" title="fffffffffffffff">fffffffffffffff</a></li>
+					<li><a href="#" title="ggggggggggggggg">ggggggggggggggg</a></li>
+				</ul>
+			</div>
+			
+</body>
+<script src="./js/jquery.min.js"></script>
+<script>
+	/*****************该Js 主要是用于循环播放列表信息*********/
+$(function() {
+    var $this = $("#news");
+    var scrollTimer;
+    $this.hover(function() {
+        clearInterval(scrollTimer);
+    }, function() {
+        scrollTimer = setInterval(function() {
+            scrollNews($this);
+        }, 2000);
+    }).trigger("mouseleave");
+
+    function scrollNews(obj) {
+        var $self = obj.find("ul");
+        var lineHeight = $self.find("li:first").height(); 
+        $self.animate({
+            "marginTop": -lineHeight + "px"
+        }, 600, function() {
+            $self.css({
+                marginTop: 0
+            }).find("li:first").appendTo($self);
+        })
+    }
+})
+</script>
+</html>
