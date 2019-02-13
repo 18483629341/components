@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- 此页面作为所有页面的模板页面参考 -->
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<title>自动滚动</title>
+	<link rel="stylesheet" type="text/css" href="./index.css">
+
+</head>
+
+<body>
+	<header id="header">
+		定义某一个样式：“@”<br>
+			@light-blue: @nice-blue + #111;
+		<p class="niceBlue">@nice-blue: #5B83AD;</p>
+	</header>
+	<br>
+	<div>
+		定义某一个样式类 “.”<br>
+		@bordered { border-top: dotted 1px black; border-bottom: solid 2px black; }
+		<div class="menu">
+			color: #111; @bordered;
+			
+		</div>
+		<div class="post">
+			color: red; @bordered;
+			
+		</div>
+	</div>
+	<br>
+	<div class="clearfix">
+		内容生成：“&::after”
+	</div>
+	<div id="news">
+		<ul>
+			<li>
+				<a href="#" title="aaaaaaaaaaaaaaa">aaaaaaaaaaaaaaa</a>
+			</li>
+			<li>
+				<a href="#" title="bbbbbbbbbbbbbbb">bbbbbbbbbbbbbbb</a>
+			</li>
+			<li>
+				<a href="#" title="ccccccccccccccc">ccccccccccccccc</a>
+			</li>
+			<li>
+				<a href="#" title="ddddddddddddddd">ddddddddddddddd</a>
+			</li>
+			<li>
+				<a href="#" title="eeeeeeeeeeeeeee">eeeeeeeeeeeeeee</a>
+			</li>
+			<li>
+				<a href="#" title="fffffffffffffff">fffffffffffffff</a>
+			</li>
+			<li>
+				<a href="#" title="ggggggggggggggg">ggggggggggggggg</a>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+
+</html>

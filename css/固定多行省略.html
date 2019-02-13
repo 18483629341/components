@@ -1,0 +1,81 @@
+<html>
+
+<head>
+	<script type="text/javascript">
+	</script>
+	<style>
+		.text1 {
+			/*单行*/
+			width: 200px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-o-text-overflow: ellipsis;
+			-webkit-text-overflow: ellipsis;
+			-moz-text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.text2 {
+			/*多行*/
+			width: 200px;
+			word-break: break-all;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+	</style>
+	<style>
+		p {
+			position: relative;
+			margin: 20px auto;
+			width: 286px;
+			font-size: 13px;
+			color: #868789;
+			line-height: 17px;
+			text-align: left;
+			overflow: hidden;
+		}
+
+		.p-after:after {
+			content: "...";
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			padding-left: 40px;
+			background: -webkit-linear-gradient(left, transparent, #fff 55%);
+			background: -moz-linear-gradient(left, transparent, #fff 55%);
+			background: -o-linear-gradient(left, transparent, #fff 55%);
+			background: linear-gradient(to right, transparent, #fff 55%);
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="text1">热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个</div>
+
+	<div class="text2">热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个</div>
+
+	<p class="p-after">热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个</p>
+
+	<p>热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个</p>
+	<script src="../jquery.min.js"></script>
+	<script>
+		$(function () {
+			//获取文本的行高，并获取文本的高度，假设我们规定的行数是五行，那么对超过行数的部分进行限制高度，并加上省略号
+			$('p').each(function (i, obj) {
+				var lineHeight = parseInt($(this).css("line-height"));
+				var height = parseInt($(this).height());
+				if ((height / lineHeight) > 2) {
+					$(this).addClass("p-after")
+					$(this).css("height", "34px");
+				} else {
+					$(this).removeClass("p-after");
+				}
+			});
+		})
+	</script>
+</body>
+
+</html>

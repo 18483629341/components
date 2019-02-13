@@ -1,0 +1,40 @@
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+body{
+	color: #333;
+}
+#header {
+  color: @light-blue;
+  .niceBlue{
+ 	 color:@nice-blue;
+	  
+   }
+}
+
+.bordered {
+	border-top: dotted 1px black;
+	border-bottom: solid 2px black;
+}
+.menu{
+	color: #111;
+	.bordered;
+} 
+.post {
+	color: red;
+	.bordered;
+}
+
+.clearfix {
+	display: block;
+	height: 20px;
+  
+	&:after {
+	  content: "&:after content";
+	  display: block;
+	  font-size: 14px;
+	  width: 100%;
+	  height: 100%;
+	//   clear: both;
+	//   visibility: hidden;
+	}
+  }
