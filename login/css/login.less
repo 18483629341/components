@@ -1,0 +1,343 @@
+@import 'common.css';
+@charset "utf-8";
+@activeBorder:#5bac61;
+@inputBorder:#14ee81;
+@errorBorder:red;
+
+.header {
+    width:100%;
+    //overflow: hidden;
+    height:150px;
+    .headerMain{
+       // min-width:@windowMinWidth;
+        width: 72%;
+        margin: 0 auto;
+        height:100%;
+    }
+    img {
+        width: 712px;
+        height: auto;
+        margin-top: 41px;
+    }
+}
+.main {
+    //min-width: @windowMinWidth;
+    flex: 1;
+    width:100%;
+    padding:0 12%;
+    background: #4fa35b;
+    .centerCon{
+        width: 100%;
+        height:529px;
+        position: relative;
+        top:50%;
+        transform: translateY(-50%);
+    }
+}
+.footer{
+    height: 150px;
+    line-height: 148px;
+    text-align: center;
+    color:#666;
+    .inner+.inner{
+        margin-left:20px;
+    }
+}
+.themeBox{
+    max-width:750px;
+    width:100%;
+    height:100%;
+    background: url('../img/left_pic1.png') no-repeat;
+    background-size:100% 100%; 
+    position: absolute;
+    left: 0;
+}
+.login_content {
+    width: 340px;
+    height:350px;
+    margin:auto 0;
+    background: #ffffff;
+    .login_area {
+        height: 100%;
+        z-index: 999;
+        border-radius: 3px;
+        padding:30px 33px 15px 33px;
+        .inputP {
+            width: 100%;
+            height: 44px;
+            line-height: 42px;
+            border: 1px solid #c9c9c9;
+            border-radius: 3px;
+            font-size: 14px;
+            text-indent: 44px;
+            input{
+                width: 210px;
+                border: none;
+                height:25px;
+                line-height: 25px;
+                border-left:1px solid #dbdbdb;
+                text-indent: 8px;
+            }
+        }
+        .userDiv{
+            height: 100px;
+            padding-top: 27px;
+        }
+        .passwordDiv{
+            min-height:60px;
+        }
+        .user {
+            background: url(../img/user.png) center left no-repeat;
+        }
+        .password {
+            background: url(../img/password.png) center left no-repeat;
+        }
+        .inputP.active, .inputP:hover{
+            border:1px solid @activeBorder;
+            input{
+               // border-left:1px solid @activeBorder;
+               font-size: 14px;
+               letter-spacing: 1px;
+            }
+            
+        }
+       
+        /*.user:hover {
+            background: url(../img/user_on.png) center left no-repeat;
+        }
+        .password:hover {
+            background: url(../img/password_on.png) center left no-repeat;
+        }*/
+       
+        
+    }
+    .login_header {
+        width: 100%;
+        height: 10%;
+        margin: 0 auto;
+        background: url(../img/logo.png) center left no-repeat;
+    }
+    .login_name{
+        font-size: 24px;
+        height: 27px;
+        color:#4fa35b;
+        line-height: 25px;
+        //background: url(../img/2.png) repeat-x;
+    }
+    .login_title{
+        background: #ffffff;
+        color: #4fa35b;
+    }
+    .helpBolck{
+        font-size: 14px;
+        height:34px;
+        line-height: 32px;
+        color:#ff431f;
+        display: none;
+        text-align: center;
+    }
+    .inputP.error{
+        border:1px solid @errorBorder;
+        // input{
+        //     border-left:1px solid @errorBorder;
+        // }
+    }
+    .helpBolck.error{
+        display: block;
+    }
+}
+
+.border{
+    border:1px solid red;
+}
+
+.checkBox{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height:21px;
+    top: 9px;
+    background: url(../img/rdo.png) no-repeat;
+    cursor: pointer;
+}
+
+.checkBox.active{
+    background: url(../img/rdo_on.png) no-repeat;
+}
+
+
+
+.remeberPass{
+    margin-left: 2px;
+    color:#666666;
+}
+.radioDiv{
+    min-height:44px;
+}
+
+.remember {
+    margin-top: 23px;
+    width: 120px;
+    height: 48px;
+    line-height: 50px;
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+    font-size: 18px;
+    text-indent: 10px;
+}
+
+.yzm {
+    line-height: 50px;
+    position: relative;
+}
+
+.yzm img {
+    width: 27%;
+    position: absolute;
+    left: 183px;
+    top: 15px;
+}
+
+.login-btn {
+    // width: 320px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 6px;
+    
+}
+
+.login-btn {
+    cursor: pointer;
+    position: relative;
+    button {
+        width: 100%;
+        height: 100%;
+        border: none;
+        
+        background: url(../img/login_btn.png) repeat-x;
+        background-size:100%;
+        color: #fff;
+        font-size: 18px;
+        line-height: 38px;
+        border-radius: 3px;
+        // font-weight: 600;
+        letter-spacing: 5px;
+    // border: 1px solid red;
+    }
+    button:focus {
+        outline: none;
+    }
+    button::after{
+        position: absolute;
+        left:0;
+        top:0;
+        width: 100%;
+        height:100%;
+        content: '';
+        background: rgba(255, 255, 255, .2);
+        display: none;
+    }
+}
+.login-btn:hover{
+    button::after{
+        display: block;
+    }
+}
+
+
+
+.content {
+    background: rgba(0, 0, 0, .1);
+    zoom: 1;
+}
+
+.content:after {
+    content: '.';
+    width: 0;
+    height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+
+/*登录添加*/
+.login_area input {
+    font-family: "microsoft yahei";
+}
+
+.login_area input:focus {
+    outline: medium;
+}
+
+.login_area input::-ms-clear {
+    display: none;
+}
+
+/*注册*/
+.register {
+    width: 905px;
+    height: auto;
+    overflow: hidden;
+    background: url(../img/register_bg.png) no-repeat;
+    z-index: 9999;
+    margin: 0 auto;
+    top: 10%;
+    position: absolute;
+    left: 18%;
+    display: none;
+}
+
+.register_con {
+    overflow: hidden;
+    margin: 20px;
+    background: #fff;
+    padding: 15px 20px;
+}
+
+.title {
+    font-size: 18px;
+    color: #1b74e2;
+    font-weight: bold;
+    border-bottom: solid 1px #2786d6;
+    padding-bottom: 10px;
+    text-indent: 10px;
+}
+.suggestDiv{
+    margin: 0 0 0 54px;
+    color:#7b7b7b;
+    
+} 
+.shu {
+    width: 4px;
+    height: 15px;
+    background: #295fcb;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.fr {
+    float: right;
+}
+
+.margin_right_10 {
+    margin-right: 10px;
+}
+
+.margin_bottom_100 {
+    margin-bottom: 100px;
+}
+
+.margin_bottom_120 {
+    margin-bottom: 120px;
+}
+
+.margin_bottom_30 {
+    margin-bottom: 30px;
+}
+
+.overflow {
+    overflow: hidden;
+}

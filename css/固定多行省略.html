@@ -61,20 +61,43 @@
 
 	<p>热卖精选：从子频道（服饰鞋包，亲子，居家，美妆）档期里面挑选出来，库存大于30%的高信价比商品list，数量为50个</p>
 	<script src="../jquery.min.js"></script>
+	
 	<script>
 		$(function () {
 			//获取文本的行高，并获取文本的高度，假设我们规定的行数是五行，那么对超过行数的部分进行限制高度，并加上省略号
-			$('p').each(function (i, obj) {
-				var lineHeight = parseInt($(this).css("line-height"));
-				var height = parseInt($(this).height());
-				if ((height / lineHeight) > 2) {
+			onlyTwoLine('p');
+		})
+		//最多显示两列，溢出的用省略号表示
+		var flag = true;
+		var heightArr = [];
+
+		function onlyTwoLine(tag) {
+			var lineHeight = null;
+			var height = null;
+			$(tag).each(function (i, obj) {
+				if (flag) {
+					height = parseInt($(this).height());
+					heightArr.push(height);
+				} else {
+					//返回到最初的样式；
+					$(this).removeClass("p-after")
+					if (!heightArr[i]) { //如果为0，就重新获得高度
+						heightArr[i] = parseInt($(this).height());
+					}
+				}
+
+				lineHeight = parseInt($(this).css("line-height"));
+				if ((heightArr[i] / lineHeight) > 2) {
+
 					$(this).addClass("p-after")
-					$(this).css("height", "34px");
+					$(this).css("height", "46px");
 				} else {
 					$(this).removeClass("p-after");
 				}
 			});
-		})
+
+			flag = false;
+		}
 	</script>
 </body>
 
