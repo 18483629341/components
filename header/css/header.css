@@ -1,0 +1,127 @@
+@import 'common.css';
+.body1 {
+  min-width: 1920px;
+  background-color: #f5f7f5;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.body1::-webkit-scrollbar {
+  display: none;
+}
+.header {
+  width: 100%;
+  height: 65px;
+  background: url(../img/navbarBack.png) repeat-x;
+  background-size: 100% 100%;
+}
+.header .ratio95 {
+  width: 98%;
+  height: 100%;
+  margin: 0 auto;
+}
+.header .headerMain {
+  display: inline-block;
+  width: 712px;
+  margin-top: 10px;
+}
+.headerRight {
+  float: right;
+}
+.themeList {
+  display: inline-block;
+}
+.themeList .themeLi {
+  min-width: 90px;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.themeList .themeLi .iconText {
+  display: inline-block;
+  color: #fff;
+  font-size: 16px;
+  margin-top: -2px;
+  position: relative;
+}
+.themeList .themeLi.active,
+.themeList .themeLi:hover {
+  position: relative;
+}
+.themeList .themeLi.active .iconText::after,
+.themeList .themeLi:hover .iconText::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 4px;
+  left: 0;
+  top: 25px;
+  background: #ffc000;
+  border-radius: 2px;
+}
+.icon {
+  display: inline-block;
+  width: 26px;
+  height: 24px;
+  background: url(../img/sprite.png) no-repeat;
+}
+.icon_Home {
+  background-position: -90px 0;
+}
+.icon_theme1 {
+  background-position: -120px 0;
+}
+.icon_theme2 {
+  background-position: -150px 0;
+}
+.icon_theme3 {
+  background-position: -180px 0;
+}
+.icon_theme4 {
+  background-position: -210px 0;
+}
+.icon_theme5 {
+  background-position: -240px 0;
+}
+.icon_theme6 {
+  background-position: -150px -40px;
+}
+.icon_theme7 {
+  background-position: -180px -40px;
+}
+.icon_theme8 {
+  background-position: -210px -40px;
+}
+.icon_theme9 {
+  background-position: -210px -40px;
+}
+/***header***/
+.headerRight {
+  float: right;
+  padding: 10px 0 11px 0;
+}
+.headerRight .adminDiv {
+  width: 192px;
+  text-align: right;
+  display: inline-block;
+  padding: 12px 0;
+  line-height: 16px;
+  color: #fff;
+  position: relative;
+  top: -15px;
+  cursor: pointer;
+}
+.headerRight .text {
+  margin-right: 6px;
+}
+.headerRight .downIcon {
+  width: 8px;
+  height: 6px;
+  background: url('../img/nav_xl.png') no-repeat;
+  position: relative;
+  top: -2px;
+}
+.headerRight .adminDiv:hover .downIcon {
+  transform: rotate(-180deg);
+}
